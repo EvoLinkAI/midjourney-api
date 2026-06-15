@@ -13,7 +13,7 @@
 All endpoints require Bearer token authentication.
 
 ```text
-Authorization: Bearer YOUR_API_KEY
+Authorization: Bearer ${EVOLINK_API_KEY}
 ```
 
 ## Endpoint

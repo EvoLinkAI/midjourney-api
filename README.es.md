@@ -21,7 +21,7 @@ Usa la generación de imágenes de Midjourney V7 en una sola llamada a la API.
 ```bash
 curl --request POST \
   --url https://api.evolink.ai/v1/images/generations \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "mj-v7",

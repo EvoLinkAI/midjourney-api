@@ -14,14 +14,22 @@
   Compare Midjourney API pricing, review official Midjourney V7 workflow documentation, and integrate image generation and editing through one unified API.
 </p>
 
+<p align="left">
+  <a href="https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">View Midjourney API pricing</a> ·
+  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Get your API key</a> ·
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Read Midjourney API docs</a>
+</p>
+
 ## Quick Start
 
 Use Midjourney V7 image generation in one API call.
 
 ```bash
+export EVOLINK_API_KEY="your_key_here"
+
 curl --request POST \
   --url https://api.evolink.ai/v1/images/generations \
-  --header 'Authorization: Bearer YOUR_API_KEY' \
+  --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
     "model": "mj-v7",
@@ -32,11 +40,20 @@ curl --request POST \
   }'
 ```
 
-<p align="left">
-  <a href="https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">View Midjourney API Pricing</a> ·
-  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Get API Key</a> ·
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Read API Docs</a>
-</p>
+## Full First-Run Flow
+
+Midjourney generation and editing are asynchronous. A production integration should create a task, store the task ID, poll or receive a callback, and save the final image URLs before they expire.
+
+```bash
+export EVOLINK_API_KEY="your_key_here"
+bash examples/curl/complete-flow.sh
+```
+
+Complete examples:
+
+- [cURL complete flow](./examples/curl/complete-flow.sh)
+- [Python complete flow](./examples/python/complete_flow.py)
+- [JavaScript complete flow](./examples/javascript/complete-flow.mjs)
 
 ## What Is Midjourney API?
 
@@ -134,12 +151,21 @@ Detailed parameter rules are in [`docs/prompt-parameters.md`](./docs/prompt-para
 4. poll `GET /v1/tasks/{task_id}` until the task is completed
 5. download and save the resulting images promptly because generated links are temporary
 
+Detailed lifecycle docs:
+
+- [Response Schema](./docs/response-schema.md)
+- [Error Handling](./docs/errors.md)
+- [Callback / Webhook](./docs/callbacks.md)
+
 ## Code Examples
 
+- [cURL: complete first-run flow](./examples/curl/complete-flow.sh)
 - [cURL: basic generation](./examples/curl/generate-image.sh)
 - [cURL: image-to-image](./examples/curl/image-to-image.sh)
 - [cURL: upscale](./examples/curl/upscale.sh)
 - [cURL: inpaint](./examples/curl/inpaint.sh)
+- [Python: complete first-run flow](./examples/python/complete_flow.py)
+- [JavaScript: complete first-run flow](./examples/javascript/complete-flow.mjs)
 - [JavaScript: basic generation](./examples/javascript/basic.mjs)
 - [JavaScript: image-to-image](./examples/javascript/image-to-image.mjs)
 - [JavaScript: upscale](./examples/javascript/upscale.mjs)
@@ -168,6 +194,8 @@ Detailed parameter rules are in [`docs/prompt-parameters.md`](./docs/prompt-para
 - generated image links are valid for 24 hours, so save them promptly
 - `--v`, `--version`, and `--niji` are not supported in V7 requests here
 - `--fast`, `--draft`, and `--turbo` should not be written in the prompt, use `model_params.speed`
+- object reference `--oref` only works in fast mode, is incompatible with `--q 4`, and doubles object-reference cost
+- V7 does not support multi-prompt `::`, `--stop`, `--cref`, `--cw`, `--relax`, `--repeat`, `--p`, permutations, `--stealth`, or `--public`
 - edit workflows usually require a completed task ID and selected image number
 - remove background does not use prompt or speed parameters
 - retexture and remove background accept input image URLs directly instead of relying on a source task
@@ -189,8 +217,8 @@ No. Speed is controlled through `model_params.speed`.
 ## Related Links
 
 - [Midjourney V7 Product Page](https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Get API Key](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Midjourney API Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Get your API key](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Read Midjourney API docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 
 ## Repo Note
 
