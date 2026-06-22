@@ -1,22 +1,22 @@
-# Midjourney API: Preços, Documentação Oficial, Fluxos de Trabalho e Guia de Integração
+# Midjourney API V8.1 + V7: Preços, Documentação Oficial, Fluxos de Trabalho e Guia de Integração
 
 <p align="center">
   <a href="./README.md">English</a> · <a href="./README.es.md">Español</a> · <a href="./README.pt.md">Português</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.fr.md">Français</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.zh-TW.md">繁體中文</a> · <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.ru.md">Русский</a>
 </p>
 
 <p align="center">
-  <a href="https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
     <img src="./assets/banner.jpg" alt="Midjourney API - Preços, Documentação Oficial e Guia de Integração" width="100%" />
   </a>
 </p>
 
 <p align="center">
-  Compare os preços da Midjourney API, revise a documentação oficial do fluxo de trabalho do Midjourney V7 e integre a geração e edição de imagens através de uma API unificada.
+  Compare os preços da Midjourney API, revise a documentação oficial do fluxo de trabalho do Midjourney V8.1 e integre a geração e edição de imagens através de uma API unificada.
 </p>
 
 ## Início Rápido
 
-Use a geração de imagens do Midjourney V7 em uma única chamada de API.
+Use a geração de imagens do Midjourney V8.1 em uma única chamada de API.
 
 ```bash
 curl --request POST \
@@ -24,8 +24,9 @@ curl --request POST \
   --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
-    "model": "mj-v7",
+    "model": "mj-v8.1",
     "prompt": "A cinematic shot of a Maine Coon cat on a neon-lit balcony --ar 16:9 --s 500",
+    "quality": "standard",
     "model_params": {
       "speed": "fast"
     }
@@ -33,30 +34,32 @@ curl --request POST \
 ```
 
 <p align="left">
-  <a href="https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Ver Preços da Midjourney API</a> ·
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Ver Preços da Midjourney API</a> ·
   <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Obter Chave de API</a> ·
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Ler Documentação da API</a>
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Ler Documentação da API</a>
 </p>
 
 ## O Que É a Midjourney API?
 
-A Midjourney API no EvoLink.ai oferece aos desenvolvedores acesso aos fluxos de trabalho de geração e edição de imagens do Midjourney V7 por meio de uma chave de API unificada. Com base nas referências oficiais fornecidas para este repositório, as operações atualmente cobertas incluem: geração de imagens, imagem para imagem, fluxos de referência de estilo e objeto, upscale, inpaint, outpaint, pan, remix, retexture, canvas edit, enhance, remove background e upload paint.
+Midjourney API on EvoLink.ai gives developers access to Midjourney image generation and editing workflows through one unified API key. This repository now covers the latest Midjourney V8.1 generation family while preserving the existing Midjourney V7 workflow references for integrations that still depend on V7 model IDs.
 
-Este repositório foi criado para desenvolvedores que desejam:
+This repository is built for developers who want to:
 
-- entender os preços e o comportamento de cobrança da Midjourney API
-- revisar a cobertura oficial dos fluxos de trabalho do Midjourney V7 em um só lugar
-- escolher a operação correta do Midjourney para cada tarefa
-- integrar a geração e edição do Midjourney em aplicações de produção
+- integrate Midjourney V8.1 image generation into production apps
+- understand V8.1 speed, quality, prompt parameter, and workflow behavior
+- keep existing V7 workflow examples available during migration
+- choose the right Midjourney operation for generation, variation, remix, edit, retexture, or background removal
+
 
 ## Por Que Usar o EvoLink para a Midjourney API?
 
-- uma chave de API para os fluxos de trabalho de geração e edição do Midjourney V7
-- preços transparentes por solicitação para geração nos modos draft, fast e turbo
-- fluxo de tarefas assíncrono projetado para integração em produção
-- suporte para parâmetros de prompt nativos do Midjourney V7 e fluxos de referência
-- suporte a callbacks HTTPS para fluxos de conclusão de tarefas
-- posicionamento de 99,9% de uptime na página oficial do produto
+- one API key for Midjourney V8.1 and preserved V7 workflow examples
+- asynchronous task flow designed for production integration
+- V8.1 native HD output through the top-level `quality` field
+- V8.1 speed control through `model_params.speed`
+- support for native Midjourney prompt parameters and reference workflows
+- HTTPS callback support for task completion workflows
+
 
 ## Preços da Midjourney API
 
@@ -70,7 +73,19 @@ Os preços abaixo seguem a referência do produto Midjourney V7 fornecida para e
 
 > Cada solicitação produz 4 imagens. A moderação de conteúdo do Midjourney pode filtrar alguns resultados, portanto o resultado retornado pode conter de 1 a 4 imagens. A cobrança é por solicitação, não por imagem.
 
-## Fluxos de Trabalho do Midjourney V7 Suportados
+## Latest Midjourney V8.1 Workflows
+
+| Workflow | Model | Summary |
+|---|---|---|
+| Image Generation | `mj-v8.1` | text-to-image and image-to-image with V8.1 prompt syntax, `quality`, and `speed` |
+| Variation | `mj-v8.1-variation` | create subtle or strong variants from a completed V8.1 task |
+| Remix | `mj-v8.1-remix` | reinterpret a completed result with a required new prompt |
+| Retexture | `mj-v8.1-retexture` | change image texture or style directly from an input image URL |
+| Upload Paint | `mj-v8.1-upload-paint` | advanced canvas editing from uploaded image, mask, and placement fields |
+| Canvas Edit | `mj-v8.1-edit` | reposition an existing task image on a canvas and fill blank areas |
+| Remove Background | `mj-v8.1-remove-bg` | remove the background from one input image URL without prompt or speed fields |
+
+## Preserved Fluxos de Trabalho do Midjourney V7 Suportados
 
 | Fluxo de Trabalho | Modelo | Resumo |
 |---|---|---|
@@ -90,6 +105,18 @@ Os preços abaixo seguem a referência do produto Midjourney V7 fornecida para e
 
 As referências detalhadas dos fluxos de trabalho estão em documentos separados para que o README permaneça focado em navegação, preços e orientação de integração. Cada página abaixo está alinhada com os materiais de referência oficiais fornecidos para este repositório.
 
+Latest V8.1 docs:
+
+- [V8.1 Image Generation](./docs/official-api/v8-1-image-generation.md)
+- [V8.1 Variation](./docs/official-api/v8-1-variation.md)
+- [V8.1 Remix](./docs/official-api/v8-1-remix.md)
+- [V8.1 Retexture](./docs/official-api/v8-1-retexture.md)
+- [V8.1 Upload Paint](./docs/official-api/v8-1-upload-paint.md)
+- [V8.1 Canvas Edit](./docs/official-api/v8-1-canvas-edit.md)
+- [V8.1 Remove Background](./docs/official-api/v8-1-remove-background.md)
+
+Preserved V7 docs:
+
 - [Geração de Imagens](./docs/official-api/image-generation.md)
 - [Imagem para Imagem e Referência](./docs/official-api/image-to-image-and-reference.md)
 - [Parâmetros de Prompt](./docs/prompt-parameters.md)
@@ -107,6 +134,10 @@ As referências detalhadas dos fluxos de trabalho estão em documentos separados
 ## Visão Geral dos Parâmetros de Prompt
 
 O Midjourney V7 suporta sintaxe de parâmetros nativos diretamente dentro do campo `prompt`.
+
+Midjourney V8.1 supports native parameter syntax inside the `prompt` field, but speed and output quality are API fields. Use top-level `quality` (`standard` or `hd`) and `model_params.speed` (`draft`, `fast`, or `turbo`). V8.1 `draft` returns 24 lightweight 0.5K sketch images and cannot be combined with `quality: hd`.
+
+Preserved V7 parameter overview:
 
 | Parâmetro | Exemplo | Propósito |
 |---|---|---|
@@ -136,6 +167,13 @@ As regras detalhadas de parâmetros estão em [`docs/prompt-parameters.md`](./do
 
 ## Exemplos de Código
 
+Latest V8.1 examples:
+
+- [cURL: V8.1 generation](./examples/curl/generate-image-v8-1.sh)
+- [JavaScript: V8.1 generation](./examples/javascript/basic-v8-1.mjs)
+
+Preserved V7 examples:
+
 - [cURL: geração básica](./examples/curl/generate-image.sh)
 - [cURL: imagem para imagem](./examples/curl/image-to-image.sh)
 - [cURL: upscale](./examples/curl/upscale.sh)
@@ -161,6 +199,12 @@ As regras detalhadas de parâmetros estão em [`docs/prompt-parameters.md`](./do
 
 ## Notas de Produção
 
+- V8.1 is the latest integration path for new Midjourney image-generation work
+- V8.1 generated image links are valid for 30 days according to the official V8.1 image-generation docs
+- V8.1 speed is controlled with `model_params.speed`, not prompt flags
+- V8.1 output resolution is controlled with top-level `quality`, not `--q` or `--hd`
+- V8.1 `draft` returns 24 lightweight sketches and is incompatible with `quality: "hd"`
+- V8.1 remove background only accepts `model` and `image_urls`
 - todos os endpoints requerem autenticação com token Bearer
 - os fluxos de trabalho de geração e edição do Midjourney são assíncronos
 - os callbacks devem usar HTTPS e não podem apontar para endereços IP privados
@@ -188,9 +232,9 @@ Não. A velocidade é controlada através de `model_params.speed`.
 
 ## Links Relacionados
 
-- [Página do Produto Midjourney V7](https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Página do Produto Midjourney V7](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 - [Obter Chave de API](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Documentação da Midjourney API](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Documentação da Midjourney API](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 
 ## Nota do Repositório
 

@@ -1,22 +1,22 @@
-# Midjourney API：料金・公式ドキュメント・ワークフロー・統合ガイド
+# Midjourney API V8.1 + V7：料金・公式ドキュメント・ワークフロー・統合ガイド
 
 <p align="center">
   <a href="./README.md">English</a> · <a href="./README.es.md">Español</a> · <a href="./README.pt.md">Português</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.fr.md">Français</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.zh-TW.md">繁體中文</a> · <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.ru.md">Русский</a>
 </p>
 
 <p align="center">
-  <a href="https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
     <img src="./assets/banner.jpg" alt="Midjourney API - 料金・公式ドキュメント・統合ガイド" width="100%" />
   </a>
 </p>
 
 <p align="center">
-  Midjourney APIの料金を比較し、Midjourney V7の公式ワークフロードキュメントを確認して、統一されたAPIで画像生成・編集を統合しましょう。
+  Midjourney APIの料金を比較し、Midjourney V8.1の公式ワークフロードキュメントを確認して、統一されたAPIで画像生成・編集を統合しましょう。
 </p>
 
 ## クイックスタート
 
-1回のAPI呼び出しでMidjourney V7の画像生成を使用します。
+1回のAPI呼び出しでMidjourney V8.1の画像生成を使用します。
 
 ```bash
 curl --request POST \
@@ -24,8 +24,9 @@ curl --request POST \
   --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
   --header 'Content-Type: application/json' \
   --data '{
-    "model": "mj-v7",
+    "model": "mj-v8.1",
     "prompt": "A cinematic shot of a Maine Coon cat on a neon-lit balcony --ar 16:9 --s 500",
+    "quality": "standard",
     "model_params": {
       "speed": "fast"
     }
@@ -33,30 +34,44 @@ curl --request POST \
 ```
 
 <p align="left">
-  <a href="https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Midjourney API料金を見る</a> ·
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Midjourney API料金を見る</a> ·
   <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">APIキーを取得する</a> ·
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">APIドキュメントを読む</a>
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">APIドキュメントを読む</a>
 </p>
+
+## Midjourney V8.1 Pricing Notes
+
+The V8.1 official docs describe pricing through speed and quality multipliers. This repository does not invent fixed dollar prices for V8.1.
+
+| Setting | Values | Billing note |
+|---|---|---|
+| `model_params.speed` | `draft`, `fast`, `turbo` | `draft` and `fast` use the same speed multiplier; `turbo` is about 2x fast |
+| `quality` | `standard`, `hd` | `standard` is 1x; `hd` is 1.5x |
+| Combined cost | speed x quality | for example, `turbo` + `hd` is about 3x the base |
+
+> V8.1 `draft` returns 24 lightweight 0.5K sketch images in one run and cannot be combined with `quality: "hd"`. Fast and turbo modes return 4 images per generation.
 
 ## Midjourney APIとは？
 
-EvoLink.aiのMidjourney APIは、統一されたAPIキーを通じてMidjourney V7の画像生成・編集ワークフローへのアクセスを開発者に提供します。このリポジトリに提供された公式リファレンスに基づき、現在対応している操作には：画像生成、画像から画像、スタイル・オブジェクトリファレンスワークフロー、upscale、inpaint、outpaint、pan、remix、retexture、canvas edit、enhance、remove background、upload paintが含まれます。
+Midjourney API on EvoLink.ai gives developers access to Midjourney image generation and editing workflows through one unified API key. This repository now covers the latest Midjourney V8.1 generation family while preserving the existing Midjourney V7 workflow references for integrations that still depend on V7 model IDs.
 
-このリポジトリは、以下を目的とする開発者向けに構築されています：
+This repository is built for developers who want to:
 
-- Midjourney APIの料金と課金動作を理解する
-- Midjourney V7の公式ワークフロー対応状況を一か所で確認する
-- タスクに適したMidjourney操作を選択する
-- Midjourneyの生成・編集を本番アプリに統合する
+- integrate Midjourney V8.1 image generation into production apps
+- understand V8.1 speed, quality, prompt parameter, and workflow behavior
+- keep existing V7 workflow examples available during migration
+- choose the right Midjourney operation for generation, variation, remix, edit, retexture, or background removal
+
 
 ## EvoLinkをMidjourney APIに使う理由
 
-- Midjourney V7の生成・編集ワークフローに対応した1つのAPIキー
-- draft、fast、turbo生成の透明なリクエスト単位の料金設定
-- 本番統合向けに設計された非同期タスクフロー
-- Midjourney V7のネイティブプロンプトパラメータとリファレンスワークフローのサポート
-- タスク完了ワークフロー向けのHTTPSコールバックサポート
-- 公式製品ページにおける99.9%稼働率の実績
+- one API key for Midjourney V8.1 and preserved V7 workflow examples
+- asynchronous task flow designed for production integration
+- V8.1 native HD output through the top-level `quality` field
+- V8.1 speed control through `model_params.speed`
+- support for native Midjourney prompt parameters and reference workflows
+- HTTPS callback support for task completion workflows
+
 
 ## Midjourney APIの料金
 
@@ -70,7 +85,19 @@ EvoLink.aiのMidjourney APIは、統一されたAPIキーを通じてMidjourney 
 
 > 各リクエストで4枚の画像が生成されます。Midjourneyのコンテンツモデレーションにより一部の出力がフィルタリングされる場合があるため、返される結果は1〜4枚の画像を含む場合があります。課金はリクエスト単位であり、画像単位ではありません。
 
-## 対応Midjourney V7ワークフロー
+## Latest Midjourney V8.1 Workflows
+
+| Workflow | Model | Summary |
+|---|---|---|
+| Image Generation | `mj-v8.1` | text-to-image and image-to-image with V8.1 prompt syntax, `quality`, and `speed` |
+| Variation | `mj-v8.1-variation` | create subtle or strong variants from a completed V8.1 task |
+| Remix | `mj-v8.1-remix` | reinterpret a completed result with a required new prompt |
+| Retexture | `mj-v8.1-retexture` | change image texture or style directly from an input image URL |
+| Upload Paint | `mj-v8.1-upload-paint` | advanced canvas editing from uploaded image, mask, and placement fields |
+| Canvas Edit | `mj-v8.1-edit` | reposition an existing task image on a canvas and fill blank areas |
+| Remove Background | `mj-v8.1-remove-bg` | remove the background from one input image URL without prompt or speed fields |
+
+## Preserved 対応Midjourney V7ワークフロー
 
 | ワークフロー | モデル | 概要 |
 |---|---|---|
@@ -90,6 +117,18 @@ EvoLink.aiのMidjourney APIは、統一されたAPIキーを通じてMidjourney 
 
 詳細なワークフローリファレンスは別のドキュメントに掲載されており、READMEはナビゲーション・料金・統合ガイダンスに集中しています。以下の各ページは、このリポジトリに提供された公式リファレンス資料に準拠しています。
 
+Latest V8.1 docs:
+
+- [V8.1 Image Generation](./docs/official-api/v8-1-image-generation.md)
+- [V8.1 Variation](./docs/official-api/v8-1-variation.md)
+- [V8.1 Remix](./docs/official-api/v8-1-remix.md)
+- [V8.1 Retexture](./docs/official-api/v8-1-retexture.md)
+- [V8.1 Upload Paint](./docs/official-api/v8-1-upload-paint.md)
+- [V8.1 Canvas Edit](./docs/official-api/v8-1-canvas-edit.md)
+- [V8.1 Remove Background](./docs/official-api/v8-1-remove-background.md)
+
+Preserved V7 docs:
+
 - [画像生成](./docs/official-api/image-generation.md)
 - [画像から画像とリファレンス](./docs/official-api/image-to-image-and-reference.md)
 - [プロンプトパラメータ](./docs/prompt-parameters.md)
@@ -107,6 +146,10 @@ EvoLink.aiのMidjourney APIは、統一されたAPIキーを通じてMidjourney 
 ## プロンプトパラメータの概要
 
 Midjourney V7は`prompt`フィールド内でネイティブのパラメータ構文を直接サポートしています。
+
+Midjourney V8.1 supports native parameter syntax inside the `prompt` field, but speed and output quality are API fields. Use top-level `quality` (`standard` or `hd`) and `model_params.speed` (`draft`, `fast`, or `turbo`). V8.1 `draft` returns 24 lightweight 0.5K sketch images and cannot be combined with `quality: hd`.
+
+Preserved V7 parameter overview:
 
 | パラメータ | 例 | 用途 |
 |---|---|---|
@@ -135,6 +178,13 @@ Midjourney V7は`prompt`フィールド内でネイティブのパラメータ�
 5. 生成されたリンクは一時的なため、結果の画像を速やかにダウンロードして保存する
 
 ## コード例
+
+Latest V8.1 examples:
+
+- [cURL: V8.1 generation](./examples/curl/generate-image-v8-1.sh)
+- [JavaScript: V8.1 generation](./examples/javascript/basic-v8-1.mjs)
+
+Preserved V7 examples:
 
 - [cURL: 基本的な生成](./examples/curl/generate-image.sh)
 - [cURL: 画像から画像](./examples/curl/image-to-image.sh)
@@ -188,9 +238,9 @@ upscale、inpaint、outpaint、pan、enhance、remixなどの操作は、完了�
 
 ## 関連リンク
 
-- [Midjourney V7製品ページ](https://evolink.ai/midjourney-v7?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 Image Generation Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 - [APIキーを取得する](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Midjourney APIドキュメント](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney APIドキュメント](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 
 ## リポジトリについて
 
