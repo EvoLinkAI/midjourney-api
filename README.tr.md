@@ -1,4 +1,4 @@
-# Midjourney API V8.1 + V7: Fiyatlandırma, Resmi Belgeler, İş Akışları ve Entegrasyon Kılavuzu
+# Midjourney API: V8.1 ve V7 dokümanları, iş akışları ve entegrasyon örnekleri
 
 <p align="center">
   <a href="./README.md">English</a> · <a href="./README.es.md">Español</a> · <a href="./README.pt.md">Português</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.fr.md">Français</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.zh-TW.md">繁體中文</a> · <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.ru.md">Русский</a>
@@ -6,19 +6,27 @@
 
 <p align="center">
   <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
-    <img src="./assets/banner.jpg" alt="Midjourney API - Fiyatlandırma, Resmi Belgeler ve Entegrasyon Kılavuzu" width="100%" />
+    <img src="./assets/banner.jpg" alt="Midjourney API - V8.1 ve V7 resmi dokümanları ve entegrasyon örnekleri" width="100%" />
   </a>
 </p>
 
 <p align="center">
-  Midjourney API fiyatlarını karşılaştırın, resmi Midjourney V8.1 iş akışı belgelerini inceleyin ve tek bir birleşik API aracılığıyla görüntü oluşturma ve düzenlemeyi entegre edin.
+  EvoLink ile en yeni Midjourney V8.1 görüntü üretim iş akışlarını entegre edin; mevcut entegrasyonlar için V7 dokümanlarını koruyun.
 </p>
 
-## Hızlı Başlangıç
+<p align="left">
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">V8.1 görüntü üretim dokümanını oku</a> ·
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/midjourney-v8-1-prompt-guide?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">V8.1 prompt kılavuzunu oku</a> ·
+  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">API anahtarı al</a>
+</p>
 
-Tek bir API çağrısıyla Midjourney V8.1 görüntü oluşturmayı kullanın.
+## EvoLink hızlı başlangıç
+
+Tek API çağrısıyla Midjourney V8.1 görüntü üretimini kullanın.
 
 ```bash
+export EVOLINK_API_KEY="your_key_here"
+
 curl --request POST \
   --url https://api.evolink.ai/v1/images/generations \
   --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
@@ -33,221 +41,210 @@ curl --request POST \
   }'
 ```
 
-<p align="left">
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Midjourney API Fiyatlarını Görüntüle</a> ·
-  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">API Anahtarı Al</a> ·
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">API Belgelerini Oku</a>
-</p>
+## Tam ilk çalıştırma akışı
 
-## Midjourney V8.1 Pricing Notes
+Midjourney üretim ve düzenleme işlemleri asenkrondur. Üretim entegrasyonunda görev oluşturun, görev ID’sini saklayın, durum sorgulayın veya callback alın ve nihai görüntü URL’lerini süresi dolmadan kaydedin.
 
-The V8.1 official docs describe pricing through speed and quality multipliers. This repository does not invent fixed dollar prices for V8.1.
+```bash
+export EVOLINK_API_KEY="your_key_here"
+bash examples/curl/complete-flow.sh
+```
 
-| Setting | Values | Billing note |
+Tam örnekler:
+
+- [cURL complete flow](./examples/curl/complete-flow.sh)
+- [Python complete flow](./examples/python/complete_flow.py)
+- [JavaScript complete flow](./examples/javascript/complete-flow.mjs)
+- [cURL V8.1 generation](./examples/curl/generate-image-v8-1.sh)
+- [JavaScript V8.1 generation](./examples/javascript/basic-v8-1.mjs)
+
+## Midjourney API nedir?
+
+EvoLink.ai üzerindeki Midjourney API, geliştiricilere tek bir API anahtarıyla Midjourney görüntü üretim ve düzenleme iş akışlarına erişim sağlar. Bu depo en yeni Midjourney V8.1 üretim ailesini kapsar ve hâlâ V7 model ID’lerine bağlı entegrasyonlar için V7 referanslarını korur.
+
+Bu depo şu geliştiriciler için hazırlanmıştır:
+
+- Midjourney V8.1 görüntü üretimini üretim uygulamalarına entegre etmek isteyenler
+- V8.1 hız, kalite, prompt parametresi ve workflow davranışını anlamak isteyenler
+- geçiş sırasında V7 örneklerini erişilebilir tutmak isteyenler
+- üretim, variation, remix, düzenleme, retexture veya arka plan kaldırma için doğru işlemi seçmek isteyenler
+
+## Midjourney API için neden EvoLink kullanılmalı
+
+- Midjourney V8.1 ve korunan V7 örnekleri için tek API anahtarı
+- üretim entegrasyonu için tasarlanmış asenkron görev akışı
+- üst seviye `quality` alanıyla V8.1 yerel HD çıktı
+- `model_params.speed` ile V8.1 hız kontrolü
+- Midjourney yerel prompt parametreleri ve referans iş akışları desteği
+- görev tamamlama iş akışları için HTTPS callback desteği
+
+## Midjourney V8.1 fiyatlandırma notları
+
+V8.1 resmi dokümanları ücretlendirmeyi hız ve kalite çarpanlarıyla açıklar. Bu depo V8.1 için sabit dolar fiyatları uydurmaz.
+
+| Ayar | Değerler | Ücretlendirme notu |
 |---|---|---|
-| `model_params.speed` | `draft`, `fast`, `turbo` | `draft` and `fast` use the same speed multiplier; `turbo` is about 2x fast |
-| `quality` | `standard`, `hd` | `standard` is 1x; `hd` is 1.5x |
-| Combined cost | speed x quality | for example, `turbo` + `hd` is about 3x the base |
+| `model_params.speed` | `draft`, `fast`, `turbo` | `draft` / `fast` = 1x; `turbo` ≈ 2x |
+| `quality` | `standard`, `hd` | `standard` = 1x; `hd` = 1.5x |
+| Birleşik maliyet | speed x quality | `turbo` + `hd` ≈ 3x |
 
-> V8.1 `draft` returns 24 lightweight 0.5K sketch images in one run and cannot be combined with `quality: "hd"`. Fast and turbo modes return 4 images per generation.
+> V8.1 `draft` tek çalıştırmada 24 hafif 0.5K eskiz döndürür ve `quality: "hd"` ile birlikte kullanılamaz. fast ve turbo modları üretim başına 4 görüntü döndürür.
 
-## Midjourney API Nedir?
-
-Midjourney API on EvoLink.ai gives developers access to Midjourney image generation and editing workflows through one unified API key. This repository now covers the latest Midjourney V8.1 generation family while preserving the existing Midjourney V7 workflow references for integrations that still depend on V7 model IDs.
-
-This repository is built for developers who want to:
-
-- integrate Midjourney V8.1 image generation into production apps
-- understand V8.1 speed, quality, prompt parameter, and workflow behavior
-- keep existing V7 workflow examples available during migration
-- choose the right Midjourney operation for generation, variation, remix, edit, retexture, or background removal
-
-
-## Midjourney API için Neden EvoLink Kullanmalı?
-
-- one API key for Midjourney V8.1 and preserved V7 workflow examples
-- asynchronous task flow designed for production integration
-- V8.1 native HD output through the top-level `quality` field
-- V8.1 speed control through `model_params.speed`
-- support for native Midjourney prompt parameters and reference workflows
-- HTTPS callback support for task completion workflows
-
-
-## Midjourney API Fiyatlandırması
-
-Aşağıdaki fiyatlar, bu depo için sağlanan Midjourney V7 ürün referansını takip eder.
+## Korunan Midjourney V7 üretim fiyatları
 
 | Model | Mod | Hız | Fiyat | Notlar |
 |---|---|---|---:|---|
-| `mj-v7` | görüntü oluşturma | draft | $0,040 / istek | yaklaşık 2,7 kredi, istek başına 4 görüntü |
-| `mj-v7` | görüntü oluşturma | fast | $0,079 / istek | varsayılan mod, yaklaşık 5,4 kredi |
-| `mj-v7` | görüntü oluşturma | turbo | $0,159 / istek | öncelikli mod, yaklaşık 10,8 kredi |
+| `mj-v7` | görüntü üretimi | draft | $0.040 / istek | yaklaşık 2,7 kredi; istek başına 4 görüntü |
+| `mj-v7` | görüntü üretimi | fast | $0.079 / istek | varsayılan mod; yaklaşık 5,4 kredi |
+| `mj-v7` | görüntü üretimi | turbo | $0.159 / istek | öncelikli mod; yaklaşık 10,8 kredi |
 
-> Her istek 4 görüntü üretir. Midjourney içerik moderasyonu bazı çıktıları filtreleyebilir, bu nedenle döndürülen sonuç 1 ila 4 görüntü içerebilir. Faturalandırma görüntü başına değil, istek başına yapılır.
+## En yeni Midjourney V8.1 iş akışları
 
-## Latest Midjourney V8.1 Workflows
-
-| Workflow | Model | Summary |
+| İş akışı | Model | Özet |
 |---|---|---|
-| Image Generation | `mj-v8.1` | text-to-image and image-to-image with V8.1 prompt syntax, `quality`, and `speed` |
-| Variation | `mj-v8.1-variation` | create subtle or strong variants from a completed V8.1 task |
-| Remix | `mj-v8.1-remix` | reinterpret a completed result with a required new prompt |
-| Retexture | `mj-v8.1-retexture` | change image texture or style directly from an input image URL |
-| Upload Paint | `mj-v8.1-upload-paint` | advanced canvas editing from uploaded image, mask, and placement fields |
-| Canvas Edit | `mj-v8.1-edit` | reposition an existing task image on a canvas and fill blank areas |
-| Remove Background | `mj-v8.1-remove-bg` | remove the background from one input image URL without prompt or speed fields |
+| Görüntü Üretimi | `mj-v8.1` | V8.1 prompt sözdizimi, `quality` ve `speed` ile metinden görüntü ve görüntüden görüntü |
+| Varyasyon | `mj-v8.1-variation` | tamamlanmış bir V8.1 görevinden subtle veya strong varyantlar oluşturma |
+| Remix | `mj-v8.1-remix` | zorunlu yeni prompt ile tamamlanmış sonucu yeniden yorumlama |
+| Retexture | `mj-v8.1-retexture` | giriş görüntüsü URL’sinden doğrudan doku veya stil değiştirme |
+| Upload Paint | `mj-v8.1-upload-paint` | yüklenen görüntü, mask ve konum alanlarıyla gelişmiş canvas düzenleme |
+| Canvas Edit | `mj-v8.1-edit` | görev görüntüsünü canvas üzerinde yeniden konumlandırıp boş alanları doldurma |
+| Arka Plan Kaldırma | `mj-v8.1-remove-bg` | prompt veya speed olmadan bir görüntü URL’sinden arka plan kaldırma |
 
-## Preserved Desteklenen Midjourney V7 İş Akışları
+## Korunan Midjourney V7 iş akışları
 
-| İş Akışı | Model | Özet |
+| İş akışı | Model | Özet |
 |---|---|---|
-| Görüntü Oluşturma | `mj-v7` | Midjourney V7 yerel prompt sözdizimi ile metin-görüntü ve görüntü-görüntü |
-| Upscale | `mj-v7-upscale` | tamamlanmış bir görevden seçilen bir görüntüyü büyütme |
-| Inpaint | `mj-v7-inpaint` | seçilen bir görüntüdeki maskelenmiş alanı düzenleme |
-| Outpaint | `mj-v7-outpaint` | orijinal görüntü sınırının ötesine genişletme |
-| Pan | `mj-v7-pan` | kompozisyonu bir yönde genişletme |
-| Remix | `mj-v7-remix` | mevcut bir görüntüyü yeni bir prompt ile yeniden yorumlama |
-| Retexture | `mj-v7-retexture` | yapıyı koruyarak doku veya stili değiştirme |
-| Canvas Edit | `mj-v7-edit` | görüntüyü tuval üzerinde yeniden konumlandırma ve boş alanları doldurma |
-| Enhance | `mj-v7-enhance` | seçilen oluşturulmuş bir görüntüyü iyileştirme |
-| Remove Background | `mj-v7-remove-bg` | bir giriş görüntüsünden şeffaf özne kesimi oluşturma |
-| Upload Paint | `mj-v7-upload-paint` | yüklenen görüntü, maske ve tuval ayarlarını kullanan gelişmiş düzenleme akışı |
+| Görüntü Üretimi | `mj-v7` | V7 metinden görüntü / görüntüden görüntü |
+| Upscale | `mj-v7-upscale` | seçilen bir görüntüyü büyütme |
+| Inpaint | `mj-v7-inpaint` | maskelenmiş alanı düzenleme |
+| Outpaint | `mj-v7-outpaint` | görüntü sınırının ötesine genişletme |
+| Pan | `mj-v7-pan` | tek yönde genişletme |
+| Remix | `mj-v7-remix` | yeni prompt ile yeniden yorumlama |
+| Retexture | `mj-v7-retexture` | yapıyı koruyarak doku/stil değiştirme |
+| Canvas Edit | `mj-v7-edit` | görüntüyü yeniden konumlandırıp boş alanları doldurma |
+| Enhance | `mj-v7-enhance` | seçili sonucu iyileştirme |
+| Arka Plan Kaldırma | `mj-v7-remove-bg` | şeffaf konu kesimi |
+| Upload Paint | `mj-v7-upload-paint` | upload, maske ve canvas ile gelişmiş düzenleme |
 
-## Resmi API Belgeleri
+## Resmi API dokümanları
 
-Ayrıntılı iş akışı referansları, README'nin navigasyon, fiyatlandırma ve entegrasyon rehberliğine odaklanması için ayrı belgelerde yer almaktadır. Aşağıdaki her sayfa, bu depo için sağlanan resmi referans materyalleriyle hizalanmıştır.
+Ayrıntılı workflow referansları ayrı dokümanlarda tutulur; README gezinme, fiyat notları ve entegrasyon rehberine odaklanır.
 
-Latest V8.1 docs:
+En yeni V8.1 dokümanları:
 
-- [V8.1 Image Generation](./docs/official-api/v8-1-image-generation.md)
-- [V8.1 Variation](./docs/official-api/v8-1-variation.md)
+- [V8.1 Görüntü Üretimi](./docs/official-api/v8-1-image-generation.md)
+- [V8.1 Varyasyon](./docs/official-api/v8-1-variation.md)
 - [V8.1 Remix](./docs/official-api/v8-1-remix.md)
 - [V8.1 Retexture](./docs/official-api/v8-1-retexture.md)
 - [V8.1 Upload Paint](./docs/official-api/v8-1-upload-paint.md)
 - [V8.1 Canvas Edit](./docs/official-api/v8-1-canvas-edit.md)
-- [V8.1 Remove Background](./docs/official-api/v8-1-remove-background.md)
-
-Preserved V7 docs:
-
-- [Görüntü Oluşturma](./docs/official-api/image-generation.md)
-- [Görüntüden Görüntüye ve Referans](./docs/official-api/image-to-image-and-reference.md)
+- [V8.1 Arka Plan Kaldırma](./docs/official-api/v8-1-remove-background.md)
 - [Prompt Parametreleri](./docs/prompt-parameters.md)
-- [Upscale](./docs/official-api/upscale.md)
-- [Inpaint](./docs/official-api/inpaint.md)
-- [Outpaint](./docs/official-api/outpaint.md)
-- [Pan](./docs/official-api/pan.md)
-- [Remix](./docs/official-api/remix.md)
-- [Retexture](./docs/official-api/retexture.md)
-- [Canvas Edit](./docs/official-api/canvas-edit.md)
-- [Enhance](./docs/official-api/enhance.md)
-- [Remove Background](./docs/official-api/remove-background.md)
-- [Upload Paint](./docs/official-api/upload-paint.md)
 
-## Prompt Parametrelerine Genel Bakış
+Korunan V7 dokümanları:
 
-Midjourney V7, `prompt` alanı içinde doğrudan yerel parametre sözdizimini destekler.
+- [V7 Görüntü Üretimi](./docs/official-api/image-generation.md)
+- [V7 görüntüden görüntü ve referans](./docs/official-api/image-to-image-and-reference.md)
+- [V7 Upscale](./docs/official-api/upscale.md)
+- [V7 Inpaint](./docs/official-api/inpaint.md)
+- [V7 Outpaint](./docs/official-api/outpaint.md)
+- [V7 Pan](./docs/official-api/pan.md)
+- [V7 Remix](./docs/official-api/remix.md)
+- [V7 Retexture](./docs/official-api/retexture.md)
+- [V7 Canvas Edit](./docs/official-api/canvas-edit.md)
+- [V7 Enhance](./docs/official-api/enhance.md)
+- [V7 Arka Plan Kaldırma](./docs/official-api/remove-background.md)
+- [V7 Upload Paint](./docs/official-api/upload-paint.md)
 
-Midjourney V8.1 supports native parameter syntax inside the `prompt` field, but speed and output quality are API fields. Use top-level `quality` (`standard` or `hd`) and `model_params.speed` (`draft`, `fast`, or `turbo`). V8.1 `draft` returns 24 lightweight 0.5K sketch images and cannot be combined with `quality: hd`.
+## Prompt parametrelerine genel bakış
 
-Preserved V7 parameter overview:
+Midjourney V8.1, `prompt` içinde yerel parametre sözdizimini destekler; ancak hız ve çıktı kalitesi API alanlarıdır.
 
-| Parametre | Örnek | Amaç |
+| Kontrol | Nerede ayarlanır | Değerler |
 |---|---|---|
-| `--ar` | `--ar 16:9` | en boy oranı |
-| `--s` | `--s 500` | stilize etme gücü |
-| `--c` / `--chaos` | `--c 30` | sonuç çeşitliliği |
-| `--q` | `--q 2` | kalite seviyesi |
-| `--seed` | `--seed 12345` | tekrarlanabilir keşif |
-| `--no` | `--no text, watermark` | öğeleri dışla |
-| `--iw` | `--iw 1.5` | görüntü prompt ağırlığı |
-| `--sref` | `--sref https://...` | stil referansı |
-| `--oref` | `--oref https://...` | nesne referansı |
-| `--raw` | `--raw` | güzelleştirmeyi azalt |
-| `--tile` | `--tile` | kesintisiz desen oluşturma |
-| `--w` | `--w 500` | tuhaflık |
-| `--exp` | `--exp 25` | deneysel estetik |
+| Hız | `model_params.speed` | `draft`, `fast`, `turbo` |
+| Çıktı kalitesi | üst seviye `quality` | `standard`, `hd` |
+| Prompt parametreleri | `prompt` | `--ar`, `--c`, `--seed`, `--s`, `--exp`, `--raw`, `--iw`, `--sref`, `--sw`, `--oref`, `--ow` |
 
-Ayrıntılı parametre kuralları [`docs/prompt-parameters.md`](./docs/prompt-parameters.md) dosyasındadır.
+V8.1 bu rotada `--q`, `--no`, `--weird`, `--tile`, `--sv`, `--stop`, `--cref`, `--cw`, `--relax`, `--repeat`, `--p`, permütasyonlar, public/stealth bayrakları, `--niji` veya multi-prompt `::` sunmaz.
 
-## Entegrasyon İş Akışı
+## Entegrasyon akışı
 
-1. EvoLink.ai'den API anahtarı al
-2. `POST /v1/images/generations` ile oluşturma veya düzenleme görevi oluştur
-3. döndürülen görev kimliğini sakla
-4. görev tamamlanana kadar `GET /v1/tasks/{task_id}` sorgula
-5. oluşturulan bağlantılar geçici olduğundan ortaya çıkan görüntüleri hemen indir ve kaydet
+1. EvoLink.ai API anahtarı
+2. `POST /v1/images/generations`
+3. görev ID’sini kaydet
+4. `GET /v1/tasks/{task_id}` sorgula veya callback kullan
+5. son görüntü URL’lerini süre dolmadan kaydet
 
-## Kod Örnekleri
+## Kod örnekleri
 
-Latest V8.1 examples:
+En yeni V8.1 örnekleri:
 
 - [cURL: V8.1 generation](./examples/curl/generate-image-v8-1.sh)
 - [JavaScript: V8.1 generation](./examples/javascript/basic-v8-1.mjs)
 
-Preserved V7 examples:
+Korunan V7 örnekleri:
 
-- [cURL: temel oluşturma](./examples/curl/generate-image.sh)
-- [cURL: görüntüden görüntüye](./examples/curl/image-to-image.sh)
+- [cURL: tam ilk çalıştırma akışı](./examples/curl/complete-flow.sh)
+- [cURL: temel üretim](./examples/curl/generate-image.sh)
+- [cURL: görüntüden görüntü](./examples/curl/image-to-image.sh)
 - [cURL: upscale](./examples/curl/upscale.sh)
 - [cURL: inpaint](./examples/curl/inpaint.sh)
-- [JavaScript: temel oluşturma](./examples/javascript/basic.mjs)
-- [JavaScript: görüntüden görüntüye](./examples/javascript/image-to-image.mjs)
+- [Python: tam ilk çalıştırma akışı](./examples/python/complete_flow.py)
+- [JavaScript: tam ilk çalıştırma akışı](./examples/javascript/complete-flow.mjs)
+- [JavaScript: temel üretim](./examples/javascript/basic.mjs)
+- [JavaScript: görüntüden görüntü](./examples/javascript/image-to-image.mjs)
 - [JavaScript: upscale](./examples/javascript/upscale.mjs)
 - [JavaScript: inpaint](./examples/javascript/inpaint.mjs)
 
-## İş Akışı Karşılaştırması
+## İş akışı karşılaştırması
 
-| İhtiyacınız varsa... | Önerilen iş akışı | Neden |
+| İhtiyacınız varsa... | Önerilen workflow | Neden |
 |---|---|---|
-| ilk geçiş oluşturma | `mj-v7` | yerel V7 görüntü oluşturma |
-| promptta bir veya daha fazla referans görüntüsü kullanma | `mj-v7` | promptun başında görüntü URL'lerini destekler |
-| yalnızca seçili bir yerel alanı değiştirme | `mj-v7-inpaint` | maske tabanlı düzenleme |
-| kompozisyonu dışa doğru genişletme | `mj-v7-outpaint` | orijinal görüntünün ötesinde daha geniş çerçeveleme |
-| sol, sağ, yukarı veya aşağı uzatma | `mj-v7-pan` | yönlü uzatma |
-| yeni bir promptla bir sonucu yeniden yorumlama | `mj-v7-remix` | mevcut bir görevden prompt tabanlı varyasyon |
-| düzeni koruyarak malzeme veya bitişi değiştirme | `mj-v7-retexture` | giriş görüntüsünden stil ve doku dönüşümü |
-| bir görüntüden özne kesimi | `mj-v7-remove-bg` | prompt gerekmez |
-| bir görüntüyü daha büyük bir tuvale yeniden konumlandırma | `mj-v7-edit` | yerleştirme kontrolüyle tuval genişletme |
+| en yeni üretim | `mj-v8.1` | en yeni V8.1 modeli |
+| hızlı eskizler | `mj-v8.1` + `speed: "draft"` | 24 hafif 0.5K eskiz |
+| HD çıktı | `mj-v8.1` + `quality: "hd"` | yerel HD çıktı |
+| varyantlar | `mj-v8.1-variation` | subtle / strong varyantlar |
+| prompt ile yeniden yorumlama | `mj-v8.1-remix` | kaynak yapıyla yeni prompt |
+| canvas düzenleme | `mj-v8.1-edit` | yeniden konumlandırma ve boş alanları doldurma |
+| yüklenen görüntü düzenleme | `mj-v8.1-upload-paint` | maske ve canvas workflow |
+| arka plan kaldırma | `mj-v8.1-remove-bg` | prompt veya speed alanı yok |
+| mevcut V7 akışları | V7 模型 | korunan uyumluluk |
 
-## Üretim Notları
+## Üretim notları
 
-- V8.1 is the latest integration path for new Midjourney image-generation work
-- V8.1 generated image links are valid for 30 days according to the official V8.1 image-generation docs
-- V8.1 speed is controlled with `model_params.speed`, not prompt flags
-- V8.1 output resolution is controlled with top-level `quality`, not `--q` or `--hd`
-- V8.1 `draft` returns 24 lightweight sketches and is incompatible with `quality: "hd"`
-- V8.1 remove background only accepts `model` and `image_urls`
-- tüm endpoint'ler Bearer token kimlik doğrulaması gerektirir
-- Midjourney oluşturma ve düzenleme iş akışları asenkrondur
-- callback'ler HTTPS kullanmalı ve özel IP adreslerini hedef alamaz
-- callback zaman aşımı en fazla 3 yeniden deneme ile 10 saniyedir
-- oluşturulan görüntü bağlantıları 24 saat geçerlidir, hemen kaydedin
-- `--v`, `--version` ve `--niji` burada V7 isteklerinde desteklenmez
-- `--fast`, `--draft` ve `--turbo` promptta yazılmamalı, `model_params.speed` kullanın
-- düzenleme iş akışları genellikle tamamlanmış görev kimliği ve seçilen görüntü numarası gerektirir
-- remove background, prompt veya hız parametresi kullanmaz
-- retexture ve remove background, kaynak bir göreve dayanmak yerine giriş görüntüsü URL'lerini doğrudan kabul eder
+- Bearer token kimlik doğrulaması
+- asenkron görevler
+- yalnızca HTTPS callback; özel IP callback URL’leri yasaktır
+- callback timeout 10 saniye, en fazla 3 tekrar
+- resmi dokümana göre V8.1 görüntü bağlantıları 30 gün geçerlidir
+- `model_params.speed` hızı kontrol eder
+- üst seviye `quality` çıktı çözünürlüğünü kontrol eder
+- `draft` 24 eskiz döndürür ve `quality: "hd"` ile uyumsuzdur
+- `mj-v8.1-remove-bg` yalnızca `model` ve `image_urls` kabul eder
+- V7 dokümanları ve örnekleri uyumluluk için korunur
 
 ## SSS
 
-### Midjourney API nasıl faturalandırılır?
-Midjourney V7 oluşturma, görüntü başına değil istek başına faturalandırılır. Bir istek 4 çıktıyı hedefler, ancak moderasyon filtresi döndürülen görüntü sayısını azaltabilir.
+### Yeni Midjourney API entegrasyonları için hangi modeli kullanmalıyım?
+Korunan bir V7 workflow özellikle gerekmiyorsa yeni görüntü üretimi için `mj-v8.1` kullanın.
 
-### Görüntüden görüntüye nasıl yapılır?
-`prompt`un başına bir veya daha fazla görüntü URL'si koyun, ardından metin açıklamanızı ve Midjourney parametrelerinizi ekleyin.
+### V8.1 HD çıktısını nasıl etkinleştiririm?
+Üst seviyede `"quality": "hd"` ayarlayın ve `model_params.speed` için `fast` veya `turbo` kullanın. `hd` ile `draft` birlikte kullanılmaz.
 
-### Düzenleme endpoint'leri neden görev kimliğine ihtiyaç duyar?
-upscale, inpaint, outpaint, pan, enhance ve remix gibi işlemler, tamamlanmış bir görevden seçilen bir görüntü üzerinde çalışır, bu nedenle orijinal görev referansı gereklidir.
+### Prompt içinde `--turbo`, `--draft` veya `--hd` yazabilir miyim?
+Hayır. Hız `model_params.speed` ile, çıktı kalitesi üst seviye `quality` alanıyla kontrol edilir.
 
-### Promptta `--turbo` veya `--draft` kullanabilir miyim?
-Hayır. Hız `model_params.speed` aracılığıyla kontrol edilir.
+### V7 örneklerini kullanmaya devam edebilir miyim?
+Evet. V7 dokümanları ve örnekleri mevcut entegrasyonlar için bilinçli olarak korunur.
 
-## İlgili Bağlantılar
+## İlgili bağlantılar
 
-- [Midjourney V8.1 Image Generation Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [API Anahtarı Al](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Midjourney API Belgeleri](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 Görüntü Üretimi Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 Prompt Guide](https://docs.evolink.ai/en/api-manual/image-series/midjourney/midjourney-v8-1-prompt-guide?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Preserved Midjourney V7 Görüntü Üretimi Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [API Anahtarı](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 
-## Depo Notu
+## Depo notu
 
-Bu depo, EvoLink.ai'de Midjourney API kullanımı için bir belge ve örnek merkezidir. Ayrıntılı resmi iş akışı materyalleri `docs/official-api/` altında düzenlenmiştir. `mjv7参考/` ise yerel referans materyali olarak kalır ve `.gitignore` aracılığıyla yüklemelerden hariç tutulur.
+Bu depo, EvoLink.ai üzerinde Midjourney API kullanımı için dokümantasyon ve örnek merkezidir. Ayrıntılı resmi workflow içerikleri `docs/official-api/` altında düzenlenmiştir; `mjv7参考/` yerel referans olarak kalır ve `.gitignore` ile upload dışında bırakılır.

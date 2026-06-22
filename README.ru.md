@@ -1,4 +1,4 @@
-# Midjourney API V8.1 + V7: Цены, Официальная Документация, Рабочие Процессы и Руководство по Интеграции
+# Midjourney API: документация V8.1 и V7, рабочие процессы и примеры интеграции
 
 <p align="center">
   <a href="./README.md">English</a> · <a href="./README.es.md">Español</a> · <a href="./README.pt.md">Português</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.fr.md">Français</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.zh-TW.md">繁體中文</a> · <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.ru.md">Русский</a>
@@ -6,19 +6,27 @@
 
 <p align="center">
   <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
-    <img src="./assets/banner.jpg" alt="Midjourney API - Цены, Официальная Документация и Руководство по Интеграции" width="100%" />
+    <img src="./assets/banner.jpg" alt="Midjourney API - официальная документация V8.1 и V7 и примеры интеграции" width="100%" />
   </a>
 </p>
 
 <p align="center">
-  Сравните цены на Midjourney API, изучите официальную документацию по рабочим процессам Midjourney V8.1 и интегрируйте генерацию и редактирование изображений через единый API.
+  Интегрируйте новейшие рабочие процессы генерации изображений Midjourney V8.1 через EvoLink и сохраняйте документацию V7 для существующих интеграций.
 </p>
 
-## Быстрый Старт
+<p align="left">
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Читать документацию V8.1</a> ·
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/midjourney-v8-1-prompt-guide?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Читать руководство по prompt V8.1</a> ·
+  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Получить API-ключ</a>
+</p>
 
-Используйте генерацию изображений Midjourney V8.1 в одном вызове API.
+## Быстрый старт EvoLink
+
+Используйте генерацию изображений Midjourney V8.1 одним API-вызовом.
 
 ```bash
+export EVOLINK_API_KEY="your_key_here"
+
 curl --request POST \
   --url https://api.evolink.ai/v1/images/generations \
   --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
@@ -33,203 +41,210 @@ curl --request POST \
   }'
 ```
 
-<p align="left">
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Посмотреть цены Midjourney API</a> ·
-  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Получить ключ API</a> ·
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">Читать документацию API</a>
-</p>
+## Полный первый запуск
+
+Генерация и редактирование Midjourney асинхронны. В production-интеграции нужно создать задачу, сохранить ID, опрашивать статус или принимать callback и сохранить финальные URL изображений до истечения срока действия.
+
+```bash
+export EVOLINK_API_KEY="your_key_here"
+bash examples/curl/complete-flow.sh
+```
+
+Полные примеры:
+
+- [cURL complete flow](./examples/curl/complete-flow.sh)
+- [Python complete flow](./examples/python/complete_flow.py)
+- [JavaScript complete flow](./examples/javascript/complete-flow.mjs)
+- [cURL V8.1 generation](./examples/curl/generate-image-v8-1.sh)
+- [JavaScript V8.1 generation](./examples/javascript/basic-v8-1.mjs)
 
 ## Что такое Midjourney API?
 
-Midjourney API on EvoLink.ai gives developers access to Midjourney image generation and editing workflows through one unified API key. This repository now covers the latest Midjourney V8.1 generation family while preserving the existing Midjourney V7 workflow references for integrations that still depend on V7 model IDs.
+Midjourney API на EvoLink.ai дает разработчикам доступ к рабочим процессам генерации и редактирования изображений Midjourney через единый API-ключ. Этот репозиторий теперь покрывает новейшую линейку Midjourney V8.1 и сохраняет справочные материалы V7 для интеграций, которые всё ещё зависят от ID моделей V7.
 
-This repository is built for developers who want to:
+Этот репозиторий создан для разработчиков, которым нужно:
 
-- integrate Midjourney V8.1 image generation into production apps
-- understand V8.1 speed, quality, prompt parameter, and workflow behavior
-- keep existing V7 workflow examples available during migration
-- choose the right Midjourney operation for generation, variation, remix, edit, retexture, or background removal
+- интегрировать генерацию изображений Midjourney V8.1 в production-приложения
+- понять скорость, качество, параметры prompt и поведение workflow в V8.1
+- сохранить примеры V7 на время миграции
+- выбрать правильную операцию для генерации, variation, remix, редактирования, retexture или удаления фона
 
+## Почему использовать EvoLink для Midjourney API
 
-## Почему стоит использовать EvoLink для Midjourney API?
+- один API-ключ для Midjourney V8.1 и сохранённых примеров V7
+- асинхронный поток задач для production-интеграции
+- нативный HD-вывод V8.1 через верхнеуровневое поле `quality`
+- управление скоростью V8.1 через `model_params.speed`
+- поддержка нативных параметров prompt и reference-workflow Midjourney
+- HTTPS callback для завершения задач
 
-- one API key for Midjourney V8.1 and preserved V7 workflow examples
-- asynchronous task flow designed for production integration
-- V8.1 native HD output through the top-level `quality` field
-- V8.1 speed control through `model_params.speed`
-- support for native Midjourney prompt parameters and reference workflows
-- HTTPS callback support for task completion workflows
+## Примечания о ценах Midjourney V8.1
 
+Официальная документация V8.1 описывает оплату через множители скорости и качества. Этот репозиторий не придумывает фиксированные долларовые цены для V8.1.
 
-## Цены на Midjourney API
+| Настройка | Значения | Примечание об оплате |
+|---|---|---|
+| `model_params.speed` | `draft`, `fast`, `turbo` | `draft` / `fast` = 1x; `turbo` ≈ 2x |
+| `quality` | `standard`, `hd` | `standard` = 1x; `hd` = 1.5x |
+| Комбинированная стоимость | speed x quality | `turbo` + `hd` ≈ 3x |
 
-Приведенные ниже цены соответствуют справочнику продукта Midjourney V7, предоставленному для этого репозитория.
+> V8.1 `draft` возвращает 24 лёгких 0.5K-эскиза за один запуск и не совместим с `quality: "hd"`. Режимы fast и turbo возвращают 4 изображения за генерацию.
+
+## Сохранённые цены генерации Midjourney V7
 
 | Модель | Режим | Скорость | Цена | Примечания |
 |---|---|---|---:|---|
-| `mj-v7` | генерация изображений | draft | $0,040 / запрос | около 2,7 кредитов, 4 изображения за запрос |
-| `mj-v7` | генерация изображений | fast | $0,079 / запрос | режим по умолчанию, около 5,4 кредитов |
-| `mj-v7` | генерация изображений | turbo | $0,159 / запрос | приоритетный режим, около 10,8 кредитов |
+| `mj-v7` | генерация изображений | draft | $0.040 / запрос | 2,7 кредита; 4 изображения за запрос |
+| `mj-v7` | генерация изображений | fast | $0.079 / запрос | режим по умолчанию; 5,4 кредита |
+| `mj-v7` | генерация изображений | turbo | $0.159 / запрос | приоритетный режим; 10,8 кредита |
 
-> Каждый запрос производит 4 изображения. Модерация контента Midjourney может отфильтровать некоторые выходные данные, поэтому возвращаемый результат может содержать от 1 до 4 изображений. Выставление счетов производится за запрос, а не за изображение.
+## Новейшие рабочие процессы Midjourney V8.1
 
-## Latest Midjourney V8.1 Workflows
-
-| Workflow | Model | Summary |
+| Workflow | Модель | Описание |
 |---|---|---|
-| Image Generation | `mj-v8.1` | text-to-image and image-to-image with V8.1 prompt syntax, `quality`, and `speed` |
-| Variation | `mj-v8.1-variation` | create subtle or strong variants from a completed V8.1 task |
-| Remix | `mj-v8.1-remix` | reinterpret a completed result with a required new prompt |
-| Retexture | `mj-v8.1-retexture` | change image texture or style directly from an input image URL |
-| Upload Paint | `mj-v8.1-upload-paint` | advanced canvas editing from uploaded image, mask, and placement fields |
-| Canvas Edit | `mj-v8.1-edit` | reposition an existing task image on a canvas and fill blank areas |
-| Remove Background | `mj-v8.1-remove-bg` | remove the background from one input image URL without prompt or speed fields |
+| Генерация изображений | `mj-v8.1` | text-to-image и изображение-в-изображение с синтаксисом V8.1, `quality` и `speed` |
+| Вариация | `mj-v8.1-variation` | создание subtle или strong вариантов из завершённой задачи V8.1 |
+| Remix | `mj-v8.1-remix` | переинтерпретация результата с обязательным новым prompt |
+| Retexture | `mj-v8.1-retexture` | изменение текстуры или стиля напрямую из URL изображения |
+| Upload Paint | `mj-v8.1-upload-paint` | расширенное редактирование canvas с загруженным изображением, mask и позицией |
+| Canvas Edit | `mj-v8.1-edit` | перемещение изображения задачи на canvas и заполнение пустых областей |
+| Удаление фона | `mj-v8.1-remove-bg` | удаление фона из URL изображения без prompt и speed |
 
-## Preserved Поддерживаемые Рабочие Процессы Midjourney V7
+## Сохранённые рабочие процессы Midjourney V7
 
-| Рабочий процесс | Модель | Описание |
+| Workflow | Модель | Описание |
 |---|---|---|
-| Генерация изображений | `mj-v7` | текст в изображение и изображение в изображение с нативным синтаксисом prompt Midjourney V7 |
-| Upscale | `mj-v7-upscale` | увеличить одно выбранное изображение из завершённой задачи |
-| Inpaint | `mj-v7-inpaint` | редактировать замаскированную область на выбранном изображении |
-| Outpaint | `mj-v7-outpaint` | расширить за пределы исходной границы изображения |
-| Pan | `mj-v7-pan` | расширить композицию в одном направлении |
-| Remix | `mj-v7-remix` | переинтерпретировать существующее изображение с новым prompt |
-| Retexture | `mj-v7-retexture` | изменить текстуру или стиль, сохранив структуру |
-| Canvas Edit | `mj-v7-edit` | перепозиционировать изображение на холсте и заполнить пустые области |
-| Enhance | `mj-v7-enhance` | улучшить одно выбранное сгенерированное изображение |
-| Remove Background | `mj-v7-remove-bg` | сгенерировать прозрачный силуэт объекта из входного изображения |
-| Upload Paint | `mj-v7-upload-paint` | расширенный поток редактирования с использованием загруженного изображения, маски и настроек холста |
+| Генерация изображений | `mj-v7` | V7 текст-в-изображение / изображение-в-изображение |
+| Upscale | `mj-v7-upscale` | увеличить выбранное изображение |
+| Inpaint | `mj-v7-inpaint` | редактировать область маски |
+| Outpaint | `mj-v7-outpaint` | расширить за границы изображения |
+| Pan | `mj-v7-pan` | расширить в одном направлении |
+| Remix | `mj-v7-remix` | переинтерпретировать с новым prompt |
+| Retexture | `mj-v7-retexture` | изменить текстуру/стиль, сохранив структуру |
+| Canvas Edit | `mj-v7-edit` | переместить изображение и заполнить пустые области |
+| Enhance | `mj-v7-enhance` | улучшить выбранный результат |
+| Удаление фона | `mj-v7-remove-bg` | прозрачная вырезка объекта |
+| Upload Paint | `mj-v7-upload-paint` | расширенное редактирование upload/mask/canvas |
 
-## Официальная Документация API
+## Официальная документация API
 
-Подробные справочники рабочих процессов находятся в отдельных документах, чтобы README оставался сосредоточенным на навигации, ценах и руководстве по интеграции. Каждая страница ниже соответствует официальным справочным материалам, предоставленным для этого репозитория.
+Подробные workflow-справки вынесены в отдельные документы, чтобы README фокусировался на навигации, ценовых заметках и интеграции.
 
-Latest V8.1 docs:
+Новейшая документация V8.1:
 
-- [V8.1 Image Generation](./docs/official-api/v8-1-image-generation.md)
-- [V8.1 Variation](./docs/official-api/v8-1-variation.md)
+- [V8.1 Генерация изображений](./docs/official-api/v8-1-image-generation.md)
+- [V8.1 Вариация](./docs/official-api/v8-1-variation.md)
 - [V8.1 Remix](./docs/official-api/v8-1-remix.md)
 - [V8.1 Retexture](./docs/official-api/v8-1-retexture.md)
 - [V8.1 Upload Paint](./docs/official-api/v8-1-upload-paint.md)
 - [V8.1 Canvas Edit](./docs/official-api/v8-1-canvas-edit.md)
-- [V8.1 Remove Background](./docs/official-api/v8-1-remove-background.md)
-
-Preserved V7 docs:
-
-- [Генерация изображений](./docs/official-api/image-generation.md)
-- [Изображение в изображение и ссылки](./docs/official-api/image-to-image-and-reference.md)
+- [V8.1 Удаление фона](./docs/official-api/v8-1-remove-background.md)
 - [Параметры prompt](./docs/prompt-parameters.md)
-- [Upscale](./docs/official-api/upscale.md)
-- [Inpaint](./docs/official-api/inpaint.md)
-- [Outpaint](./docs/official-api/outpaint.md)
-- [Pan](./docs/official-api/pan.md)
-- [Remix](./docs/official-api/remix.md)
-- [Retexture](./docs/official-api/retexture.md)
-- [Canvas Edit](./docs/official-api/canvas-edit.md)
-- [Enhance](./docs/official-api/enhance.md)
-- [Remove Background](./docs/official-api/remove-background.md)
-- [Upload Paint](./docs/official-api/upload-paint.md)
 
-## Обзор Параметров Prompt
+Сохранённая документация V7:
 
-Midjourney V7 поддерживает нативный синтаксис параметров непосредственно в поле `prompt`.
+- [V7 Генерация изображений](./docs/official-api/image-generation.md)
+- [V7 изображение-в-изображение и reference](./docs/official-api/image-to-image-and-reference.md)
+- [V7 Upscale](./docs/official-api/upscale.md)
+- [V7 Inpaint](./docs/official-api/inpaint.md)
+- [V7 Outpaint](./docs/official-api/outpaint.md)
+- [V7 Pan](./docs/official-api/pan.md)
+- [V7 Remix](./docs/official-api/remix.md)
+- [V7 Retexture](./docs/official-api/retexture.md)
+- [V7 Canvas Edit](./docs/official-api/canvas-edit.md)
+- [V7 Enhance](./docs/official-api/enhance.md)
+- [V7 Удаление фона](./docs/official-api/remove-background.md)
+- [V7 Upload Paint](./docs/official-api/upload-paint.md)
 
-Midjourney V8.1 supports native parameter syntax inside the `prompt` field, but speed and output quality are API fields. Use top-level `quality` (`standard` or `hd`) and `model_params.speed` (`draft`, `fast`, or `turbo`). V8.1 `draft` returns 24 lightweight 0.5K sketch images and cannot be combined with `quality: hd`.
+## Обзор параметров prompt
 
-Preserved V7 parameter overview:
+Midjourney V8.1 поддерживает нативный синтаксис параметров внутри `prompt`, но скорость и качество вывода задаются полями API.
 
-| Параметр | Пример | Назначение |
+| Параметр | Где задаётся | Значения |
 |---|---|---|
-| `--ar` | `--ar 16:9` | соотношение сторон |
-| `--s` | `--s 500` | сила стилизации |
-| `--c` / `--chaos` | `--c 30` | разнообразие результатов |
-| `--q` | `--q 2` | уровень качества |
-| `--seed` | `--seed 12345` | воспроизводимое исследование |
-| `--no` | `--no text, watermark` | исключить элементы |
-| `--iw` | `--iw 1.5` | вес изображения в prompt |
-| `--sref` | `--sref https://...` | ссылка на стиль |
-| `--oref` | `--oref https://...` | ссылка на объект |
-| `--raw` | `--raw` | уменьшить украшение |
-| `--tile` | `--tile` | генерация бесшовного узора |
-| `--w` | `--w 500` | странность |
-| `--exp` | `--exp 25` | экспериментальная эстетика |
+| Скорость | `model_params.speed` | `draft`, `fast`, `turbo` |
+| Качество вывода | верхнеуровневое `quality` | `standard`, `hd` |
+| Параметры prompt | `prompt` | `--ar`, `--c`, `--seed`, `--s`, `--exp`, `--raw`, `--iw`, `--sref`, `--sw`, `--oref`, `--ow` |
 
-Подробные правила параметров находятся в [`docs/prompt-parameters.md`](./docs/prompt-parameters.md).
+V8.1 на этом маршруте не предоставляет `--q`, `--no`, `--weird`, `--tile`, `--sv`, `--stop`, `--cref`, `--cw`, `--relax`, `--repeat`, `--p`, перестановки, флаги public/stealth, `--niji` и multi-prompt `::`.
 
-## Рабочий Процесс Интеграции
+## Поток интеграции
 
-1. получить ключ API на EvoLink.ai
-2. создать задачу генерации или редактирования с помощью `POST /v1/images/generations`
-3. сохранить возвращённый идентификатор задачи
-4. опрашивать `GET /v1/tasks/{task_id}` до завершения задачи
-5. незамедлительно скачать и сохранить полученные изображения, так как сгенерированные ссылки временны
+1. API-ключ EvoLink.ai
+2. `POST /v1/images/generations`
+3. сохранить ID задачи
+4. опрашивать `GET /v1/tasks/{task_id}` или использовать callback
+5. сохранить финальные URL изображений до истечения срока
 
-## Примеры Кода
+## Примеры кода
 
-Latest V8.1 examples:
+Новейшие примеры V8.1:
 
 - [cURL: V8.1 generation](./examples/curl/generate-image-v8-1.sh)
 - [JavaScript: V8.1 generation](./examples/javascript/basic-v8-1.mjs)
 
-Preserved V7 examples:
+Сохранённые примеры V7:
 
+- [cURL: полный первый запуск](./examples/curl/complete-flow.sh)
 - [cURL: базовая генерация](./examples/curl/generate-image.sh)
-- [cURL: изображение в изображение](./examples/curl/image-to-image.sh)
+- [cURL: изображение-в-изображение](./examples/curl/image-to-image.sh)
 - [cURL: upscale](./examples/curl/upscale.sh)
 - [cURL: inpaint](./examples/curl/inpaint.sh)
+- [Python: полный первый запуск](./examples/python/complete_flow.py)
+- [JavaScript: полный первый запуск](./examples/javascript/complete-flow.mjs)
 - [JavaScript: базовая генерация](./examples/javascript/basic.mjs)
-- [JavaScript: изображение в изображение](./examples/javascript/image-to-image.mjs)
+- [JavaScript: изображение-в-изображение](./examples/javascript/image-to-image.mjs)
 - [JavaScript: upscale](./examples/javascript/upscale.mjs)
 - [JavaScript: inpaint](./examples/javascript/inpaint.mjs)
 
-## Сравнение Рабочих Процессов
+## Сравнение workflow
 
-| Если нужно... | Рекомендуемый рабочий процесс | Почему |
+| Если вам нужно... | Рекомендуемый workflow | Почему |
 |---|---|---|
-| первичная генерация | `mj-v7` | нативная генерация изображений V7 |
-| использовать одно или несколько опорных изображений в prompt | `mj-v7` | поддерживает URL-адреса изображений в начале prompt |
-| изменить только выбранную локальную область | `mj-v7-inpaint` | редактирование на основе маски |
-| расширить композицию наружу | `mj-v7-outpaint` | более широкий кадр за пределами исходного изображения |
-| расширить влево, вправо, вверх или вниз | `mj-v7-pan` | направленное расширение |
-| переинтерпретировать один результат с новым prompt | `mj-v7-remix` | вариация на основе prompt из существующей задачи |
-| сохранить компоновку, но изменить материал или отделку | `mj-v7-retexture` | преобразование стиля и текстуры из входного изображения |
-| вырезать объект из одного изображения | `mj-v7-remove-bg` | prompt не требуется |
-| перепозиционировать изображение на большем холсте | `mj-v7-edit` | расширение холста с управлением расположением |
+| новейшая генерация | `mj-v8.1` | новейшая модель V8.1 |
+| быстрые эскизы | `mj-v8.1` + `speed: "draft"` | 24 лёгких 0.5K-эскиза |
+| HD-вывод | `mj-v8.1` + `quality: "hd"` | нативный HD-вывод |
+| варианты | `mj-v8.1-variation` | subtle / strong варианты |
+| переинтерпретация prompt | `mj-v8.1-remix` | новый prompt с исходной структурой |
+| редактирование canvas | `mj-v8.1-edit` | переместить и заполнить пустые области |
+| редактирование загруженного изображения | `mj-v8.1-upload-paint` | workflow маски и canvas |
+| удаление фона | `mj-v8.1-remove-bg` | без полей prompt и speed |
+| существующие V7-потоки | V7 模型 | сохранённая совместимость |
 
-## Замечания по Производственному Использованию
+## Production-примечания
 
-- все конечные точки требуют аутентификации с токеном Bearer
-- рабочие процессы генерации и редактирования Midjourney являются асинхронными
-- обратные вызовы должны использовать HTTPS и не могут быть направлены на частные IP-адреса
-- тайм-аут обратного вызова составляет 10 секунд с максимум 3 повторными попытками
-- сгенерированные ссылки на изображения действительны в течение 24 часов, сохраняйте их незамедлительно
-- `--v`, `--version` и `--niji` не поддерживаются в запросах V7 здесь
-- `--fast`, `--draft` и `--turbo` не должны быть записаны в prompt, используйте `model_params.speed`
-- рабочие процессы редактирования обычно требуют завершённого идентификатора задачи и выбранного номера изображения
-- remove background не использует параметры prompt или скорости
-- retexture и remove background принимают URL-адреса входных изображений напрямую, не полагаясь на исходную задачу
+- аутентификация Bearer token
+- асинхронные задачи
+- только HTTPS callback; URL с частными IP запрещены
+- timeout callback 10 секунд, до 3 повторов
+- согласно официальной документации, ссылки на изображения V8.1 действуют 30 дней
+- `model_params.speed` управляет скоростью
+- верхнеуровневое `quality` управляет разрешением вывода
+- `draft` возвращает 24 эскиза и несовместим с `quality: "hd"`
+- `mj-v8.1-remove-bg` принимает только `model` и `image_urls`
+- документы и примеры V7 сохранены для совместимости
 
-## Часто Задаваемые Вопросы
+## FAQ
 
-### Как выставляется счёт за Midjourney API?
-Генерация Midjourney V7 оплачивается за запрос, а не за изображение. Один запрос нацелен на 4 выходных результата, но фильтрация модерации может уменьшить количество возвращаемых изображений.
+### Какую модель использовать для новых интеграций Midjourney API?
+Используйте `mj-v8.1` для новой генерации изображений, если вам не нужен конкретный сохранённый workflow V7.
 
-### Как выполнить преобразование изображения в изображение?
-Поместите один или несколько URL-адресов изображений в начало поля `prompt`, затем добавьте текстовое описание и параметры Midjourney.
+### Как включить HD-вывод в V8.1?
+Установите `"quality": "hd"` на верхнем уровне и используйте `model_params.speed` как `fast` или `turbo`. Не сочетайте `hd` с `draft`.
 
-### Почему конечным точкам редактирования нужен идентификатор задачи?
-Операции типа upscale, inpaint, outpaint, pan, enhance и remix работают с выбранным изображением из завершённой задачи, поэтому им требуется ссылка на исходную задачу.
+### Можно ли писать `--turbo`, `--draft` или `--hd` в prompt?
+Нет. Скорость задаётся через `model_params.speed`, а качество вывода — через верхнеуровневое поле `quality`.
 
-### Могу ли я использовать `--turbo` или `--draft` в prompt?
-Нет. Скорость управляется через `model_params.speed`.
+### Можно ли продолжать использовать примеры V7?
+Да. Документация и примеры V7 намеренно сохранены для существующих интеграций.
 
-## Связанные Ссылки
+## Связанные ссылки
 
-- [Midjourney V8.1 Image Generation Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Получить ключ API](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Документация Midjourney API](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 Генерация изображений Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 Prompt Guide](https://docs.evolink.ai/en/api-manual/image-series/midjourney/midjourney-v8-1-prompt-guide?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Preserved Midjourney V7 Генерация изображений Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [API-ключ](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 
-## Примечание о Репозитории
+## Примечание о репозитории
 
-Этот репозиторий является центром документации и примеров для использования Midjourney API на EvoLink.ai. Подробные официальные материалы по рабочим процессам организованы в `docs/official-api/`, тогда как `mjv7参考/` остаётся локальным справочным материалом и исключён из загрузок через `.gitignore`.
+Этот репозиторий является центром документации и примеров для Midjourney API на EvoLink.ai. Подробные официальные workflow организованы в `docs/official-api/`, а `mjv7参考/` остаётся локальной справкой и исключён из загрузки через `.gitignore`.

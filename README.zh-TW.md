@@ -1,4 +1,4 @@
-# Midjourney API V8.1 + V7：定價、官方文件、工作流程與整合指南
+# Midjourney API：V8.1 與 V7 文件、工作流程和整合範例
 
 <p align="center">
   <a href="./README.md">English</a> · <a href="./README.es.md">Español</a> · <a href="./README.pt.md">Português</a> · <a href="./README.ja.md">日本語</a> · <a href="./README.ko.md">한국어</a> · <a href="./README.de.md">Deutsch</a> · <a href="./README.fr.md">Français</a> · <a href="./README.tr.md">Türkçe</a> · <a href="./README.zh-TW.md">繁體中文</a> · <a href="./README.zh-CN.md">简体中文</a> · <a href="./README.ru.md">Русский</a>
@@ -6,19 +6,27 @@
 
 <p align="center">
   <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=banner&utm_campaign=midjourney-api">
-    <img src="./assets/banner.jpg" alt="Midjourney API - 定價、官方文件與整合指南" width="100%" />
+    <img src="./assets/banner.jpg" alt="Midjourney API - V8.1 與 V7 官方文件和整合範例" width="100%" />
   </a>
 </p>
 
 <p align="center">
-  比較 Midjourney API 定價，查閱官方 Midjourney V8.1 工作流程文件，並透過單一統一 API 整合圖像生成與編輯功能。
+  透過 EvoLink 接入最新 Midjourney V8.1 圖像生成工作流程，同時保留既有整合使用的 V7 文件。
 </p>
 
-## 快速開始
+<p align="left">
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">閱讀 V8.1 圖像生成文件</a> ·
+  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/midjourney-v8-1-prompt-guide?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">閱讀 V8.1 Prompt 指南</a> ·
+  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">取得 API 金鑰</a>
+</p>
 
-透過一次 API 呼叫使用 Midjourney V8.1 圖像生成。
+## EvoLink 快速開始
+
+用一次 API 呼叫完成 Midjourney V8.1 圖像生成。
 
 ```bash
+export EVOLINK_API_KEY="your_key_here"
+
 curl --request POST \
   --url https://api.evolink.ai/v1/images/generations \
   --header "Authorization: Bearer ${EVOLINK_API_KEY}" \
@@ -33,221 +41,210 @@ curl --request POST \
   }'
 ```
 
-<p align="left">
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">查看 Midjourney API 定價</a> ·
-  <a href="https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">取得 API 金鑰</a> ·
-  <a href="https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api">閱讀 API 文件</a>
-</p>
+## 完整首次執行流程
+
+Midjourney 生成與編輯都是非同步任務。正式整合時應建立任務、保存任務 ID、輪詢或接收 callback，並在結果連結過期前保存最終圖像 URL。
+
+```bash
+export EVOLINK_API_KEY="your_key_here"
+bash examples/curl/complete-flow.sh
+```
+
+完整範例:
+
+- [cURL 完整流程](./examples/curl/complete-flow.sh)
+- [Python 完整流程](./examples/python/complete_flow.py)
+- [JavaScript 完整流程](./examples/javascript/complete-flow.mjs)
+- [cURL V8.1 生成](./examples/curl/generate-image-v8-1.sh)
+- [JavaScript V8.1 生成](./examples/javascript/basic-v8-1.mjs)
 
 ## 什麼是 Midjourney API？
 
-Midjourney API on EvoLink.ai gives developers access to Midjourney image generation and editing workflows through one unified API key. This repository now covers the latest Midjourney V8.1 generation family while preserving the existing Midjourney V7 workflow references for integrations that still depend on V7 model IDs.
+EvoLink.ai 上的 Midjourney API 讓開發者透過單一 API 金鑰存取 Midjourney 圖像生成和編輯工作流程。本倉庫現在涵蓋最新 Midjourney V8.1 生成系列，同時保留現有 Midjourney V7 工作流程參考，方便仍依賴 V7 模型 ID 的整合繼續使用。
 
-This repository is built for developers who want to:
+本倉庫適合希望完成以下工作的開發者：
 
-- integrate Midjourney V8.1 image generation into production apps
-- understand V8.1 speed, quality, prompt parameter, and workflow behavior
-- keep existing V7 workflow examples available during migration
-- choose the right Midjourney operation for generation, variation, remix, edit, retexture, or background removal
+- 將 Midjourney V8.1 圖像生成接入正式產品
+- 理解 V8.1 的速度、品質、prompt 參數和 工作流程 行為
+- 在遷移過程中繼續保留 V7 範例
+- 為生成、variation、remix、編輯、retexture 或 remove background 選擇正確操作
 
+## 為什麼用 EvoLink 呼叫 Midjourney API
 
-## 為何使用 EvoLink 呼叫 Midjourney API？
+- 一個 API 金鑰即可使用 Midjourney V8.1，並保留 V7 範例
+- 面向正式整合設計的非同步任務流程
+- 透過頂層 `quality` 欄位啟用 V8.1 原生 HD 輸出
+- 透過 `model_params.speed` 控制 V8.1 速度
+- 支援 Midjourney 原生 prompt 參數和參考圖工作流程
+- 支援任務完成場景的 HTTPS callback
 
-- one API key for Midjourney V8.1 and preserved V7 workflow examples
-- asynchronous task flow designed for production integration
-- V8.1 native HD output through the top-level `quality` field
-- V8.1 speed control through `model_params.speed`
-- support for native Midjourney prompt parameters and reference workflows
-- HTTPS callback support for task completion workflows
+## Midjourney V8.1 計費說明
 
+V8.1 官方文件透過速度和品質倍率描述計費。本倉庫不為 V8.1 編造固定美元價格。
 
-## Midjourney V8.1 Pricing Notes
-
-The V8.1 official docs describe pricing through speed and quality multipliers. This repository does not invent fixed dollar prices for V8.1.
-
-| Setting | Values | Billing note |
+| 設定 | 取值 | 計費說明 |
 |---|---|---|
-| `model_params.speed` | `draft`, `fast`, `turbo` | `draft` and `fast` use the same speed multiplier; `turbo` is about 2x fast |
-| `quality` | `standard`, `hd` | `standard` is 1x; `hd` is 1.5x |
-| Combined cost | speed x quality | for example, `turbo` + `hd` is about 3x the base |
+| `model_params.speed` | `draft`, `fast`, `turbo` | `draft` / `fast` = 1x; `turbo` ≈ 2x |
+| `quality` | `standard`, `hd` | `standard` = 1x; `hd` = 1.5x |
+| 組合成本 | speed x quality | `turbo` + `hd` ≈ 3x |
 
-> V8.1 `draft` returns 24 lightweight 0.5K sketch images in one run and cannot be combined with `quality: "hd"`. Fast and turbo modes return 4 images per generation.
+> V8.1 `draft` 一次返回 24 張輕量 0.5K 草圖，不能與 `quality: "hd"` 組合。fast 和 turbo 每次生成返回 4 張圖像。
 
-## Midjourney API 定價
-
-以下定價依據本儲存庫提供的 Midjourney V7 產品參考資料。
+## 保留的 Midjourney V7 生成價格
 
 | 模型 | 模式 | 速度 | 價格 | 備註 |
 |---|---|---|---:|---|
-| `mj-v7` | 圖像生成 | draft | $0.040 / 請求 | 約 2.7 點數，每次請求 4 張圖像 |
-| `mj-v7` | 圖像生成 | fast | $0.079 / 請求 | 預設模式，約 5.4 點數 |
-| `mj-v7` | 圖像生成 | turbo | $0.159 / 請求 | 優先模式，約 10.8 點數 |
+| `mj-v7` | 圖像生成 | draft | $0.040 / 請求 | 約 2.7 點數；每次請求 4 張圖像 |
+| `mj-v7` | 圖像生成 | fast | $0.079 / 請求 | 預設模式；约 5.4 點數 |
+| `mj-v7` | 圖像生成 | turbo | $0.159 / 請求 | 優先模式；约 10.8 點數 |
 
-> 每次請求產生 4 張圖像。Midjourney 內容審核可能過濾部分輸出，因此回傳結果可能包含 1 至 4 張圖像。計費以請求為單位，而非以圖像為單位。
-
-## Latest Midjourney V8.1 Workflows
-
-| Workflow | Model | Summary |
-|---|---|---|
-| Image Generation | `mj-v8.1` | text-to-image and image-to-image with V8.1 prompt syntax, `quality`, and `speed` |
-| Variation | `mj-v8.1-variation` | create subtle or strong variants from a completed V8.1 task |
-| Remix | `mj-v8.1-remix` | reinterpret a completed result with a required new prompt |
-| Retexture | `mj-v8.1-retexture` | change image texture or style directly from an input image URL |
-| Upload Paint | `mj-v8.1-upload-paint` | advanced canvas editing from uploaded image, mask, and placement fields |
-| Canvas Edit | `mj-v8.1-edit` | reposition an existing task image on a canvas and fill blank areas |
-| Remove Background | `mj-v8.1-remove-bg` | remove the background from one input image URL without prompt or speed fields |
-
-## Preserved 支援的 Midjourney V7 工作流程
+## 最新 Midjourney V8.1 工作流程
 
 | 工作流程 | 模型 | 說明 |
 |---|---|---|
-| 圖像生成 | `mj-v7` | 使用 Midjourney V7 原生 prompt 語法進行文字轉圖像與圖像轉圖像 |
-| Upscale | `mj-v7-upscale` | 從已完成任務中放大所選的一張圖像 |
-| Inpaint | `mj-v7-inpaint` | 編輯所選圖像中的遮罩區域 |
-| Outpaint | `mj-v7-outpaint` | 向原始圖像邊界以外擴展 |
-| Pan | `mj-v7-pan` | 向單一方向延伸構圖 |
-| Remix | `mj-v7-remix` | 以新 prompt 重新詮釋現有圖像 |
-| Retexture | `mj-v7-retexture` | 在保留結構的同時更改紋理或風格 |
-| Canvas Edit | `mj-v7-edit` | 在畫布上重新定位圖像並填補空白區域 |
-| Enhance | `mj-v7-enhance` | 改善所選的已生成圖像 |
-| Remove Background | `mj-v7-remove-bg` | 從輸入圖像生成透明主體剪裁 |
-| Upload Paint | `mj-v7-upload-paint` | 使用上傳圖像、遮罩與畫布設定的進階編輯流程 |
+| 圖像生成 | `mj-v8.1` | 文字生成圖像和圖生圖，支援 V8.1 prompt 語法、`quality` 和 `speed` |
+| 變體 | `mj-v8.1-variation` | 基於已完成的 V8.1 任務生成 subtle 或 strong 變體 |
+| Remix | `mj-v8.1-remix` | 用必填的新 prompt 重新詮釋已完成結果 |
+| Retexture | `mj-v8.1-retexture` | 直接從輸入圖像 URL 改變紋理或風格 |
+| Upload Paint | `mj-v8.1-upload-paint` | 基於上傳圖像、mask 和位置欄位進行進階畫布編輯 |
+| Canvas Edit | `mj-v8.1-edit` | 把既有任務圖像重新放到畫布上並填補空白區域 |
+| 移除背景 | `mj-v8.1-remove-bg` | 從一個輸入圖像 URL 移除背景，不需要 prompt 或 speed |
+
+## 保留的 Midjourney V7 工作流程
+
+| 工作流程 | 模型 | 說明 |
+|---|---|---|
+| 圖像生成 | `mj-v7` | V7 文字生成圖像 / 图生图 |
+| Upscale | `mj-v7-upscale` | 放大一张選中的圖像 |
+| Inpaint | `mj-v7-inpaint` | 编辑遮罩區域 |
+| Outpaint | `mj-v7-outpaint` | 擴展到圖像邊界之外 |
+| Pan | `mj-v7-pan` | 向一個方向延展 |
+| Remix | `mj-v7-remix` | 用新 prompt 重新詮釋 |
+| Retexture | `mj-v7-retexture` | 在保留结构的同时改变紋理或風格 |
+| Canvas Edit | `mj-v7-edit` | 重新定位圖像并填充空白區域 |
+| Enhance | `mj-v7-enhance` | 改善選中的結果 |
+| 移除背景 | `mj-v7-remove-bg` | 生成透明主體剪裁 |
+| Upload Paint | `mj-v7-upload-paint` | 上傳圖像、遮罩和畫布的進階编辑 |
 
 ## 官方 API 文件
 
-詳細的工作流程參考資料放在獨立文件中，讓 README 專注於導航、定價與整合說明。以下每個頁面均與本儲存庫提供的官方參考資料保持一致。
+詳細 工作流程 參考放在獨立文件中，讓 README 聚焦導覽、計費說明和整合指引。
 
-Latest V8.1 docs:
+最新 V8.1 文件:
 
-- [V8.1 Image Generation](./docs/official-api/v8-1-image-generation.md)
-- [V8.1 Variation](./docs/official-api/v8-1-variation.md)
+- [V8.1 圖像生成](./docs/official-api/v8-1-image-generation.md)
+- [V8.1 變體](./docs/official-api/v8-1-variation.md)
 - [V8.1 Remix](./docs/official-api/v8-1-remix.md)
 - [V8.1 Retexture](./docs/official-api/v8-1-retexture.md)
 - [V8.1 Upload Paint](./docs/official-api/v8-1-upload-paint.md)
 - [V8.1 Canvas Edit](./docs/official-api/v8-1-canvas-edit.md)
-- [V8.1 Remove Background](./docs/official-api/v8-1-remove-background.md)
-
-Preserved V7 docs:
-
-- [圖像生成](./docs/official-api/image-generation.md)
-- [圖像轉圖像與參考](./docs/official-api/image-to-image-and-reference.md)
+- [V8.1 移除背景](./docs/official-api/v8-1-remove-background.md)
 - [Prompt 參數](./docs/prompt-parameters.md)
-- [Upscale](./docs/official-api/upscale.md)
-- [Inpaint](./docs/official-api/inpaint.md)
-- [Outpaint](./docs/official-api/outpaint.md)
-- [Pan](./docs/official-api/pan.md)
-- [Remix](./docs/official-api/remix.md)
-- [Retexture](./docs/official-api/retexture.md)
-- [Canvas Edit](./docs/official-api/canvas-edit.md)
-- [Enhance](./docs/official-api/enhance.md)
-- [Remove Background](./docs/official-api/remove-background.md)
-- [Upload Paint](./docs/official-api/upload-paint.md)
+
+保留的 V7 文件:
+
+- [V7 圖像生成](./docs/official-api/image-generation.md)
+- [V7 图生图与參考圖](./docs/official-api/image-to-image-and-reference.md)
+- [V7 Upscale](./docs/official-api/upscale.md)
+- [V7 Inpaint](./docs/official-api/inpaint.md)
+- [V7 Outpaint](./docs/official-api/outpaint.md)
+- [V7 Pan](./docs/official-api/pan.md)
+- [V7 Remix](./docs/official-api/remix.md)
+- [V7 Retexture](./docs/official-api/retexture.md)
+- [V7 Canvas Edit](./docs/official-api/canvas-edit.md)
+- [V7 Enhance](./docs/official-api/enhance.md)
+- [V7 移除背景](./docs/official-api/remove-background.md)
+- [V7 Upload Paint](./docs/official-api/upload-paint.md)
 
 ## Prompt 參數概覽
 
-Midjourney V7 在 `prompt` 欄位中直接支援原生參數語法。
+Midjourney V8.1 支援在 `prompt` 欄位中使用原生參數語法，但速度和輸出品質是 API 欄位。
 
-Midjourney V8.1 supports native parameter syntax inside the `prompt` field, but speed and output quality are API fields. Use top-level `quality` (`standard` or `hd`) and `model_params.speed` (`draft`, `fast`, or `turbo`). V8.1 `draft` returns 24 lightweight 0.5K sketch images and cannot be combined with `quality: hd`.
-
-Preserved V7 parameter overview:
-
-| 參數 | 範例 | 用途 |
+| 控制項 | 設定位置 | 取值 |
 |---|---|---|
-| `--ar` | `--ar 16:9` | 長寬比 |
-| `--s` | `--s 500` | 風格化強度 |
-| `--c` / `--chaos` | `--c 30` | 結果多樣性 |
-| `--q` | `--q 2` | 品質等級 |
-| `--seed` | `--seed 12345` | 可重現探索 |
-| `--no` | `--no text, watermark` | 排除元素 |
-| `--iw` | `--iw 1.5` | 圖像 prompt 權重 |
-| `--sref` | `--sref https://...` | 風格參考 |
-| `--oref` | `--oref https://...` | 物件參考 |
-| `--raw` | `--raw` | 減少美化 |
-| `--tile` | `--tile` | 無縫圖案生成 |
-| `--w` | `--w 500` | 奇異度 |
-| `--exp` | `--exp 25` | 實驗性美學 |
+| 速度 | `model_params.speed` | `draft`, `fast`, `turbo` |
+| 輸出质量 | 顶层 `quality` | `standard`, `hd` |
+| Prompt 參數 | `prompt` | `--ar`, `--c`, `--seed`, `--s`, `--exp`, `--raw`, `--iw`, `--sref`, `--sw`, `--oref`, `--ow` |
 
-詳細參數規則請見 [`docs/prompt-parameters.md`](./docs/prompt-parameters.md)。
+V8.1 在此路由不暴露 `--q`、`--no`、`--weird`、`--tile`、`--sv`、`--stop`、`--cref`、`--cw`、`--relax`、`--repeat`、`--p`、排列組合、public/stealth 標記、`--niji` 或 multi-prompt `::`。
 
-## 整合工作流程
+## 整合流程
 
-1. 從 EvoLink.ai 取得 API 金鑰
-2. 使用 `POST /v1/images/generations` 建立生成或編輯任務
-3. 儲存回傳的任務 ID
-4. 持續輪詢 `GET /v1/tasks/{task_id}` 直到任務完成
-5. 盡快下載並儲存結果圖像，因為生成的連結為臨時連結
+1. EvoLink.ai API 金鑰
+2. `POST /v1/images/generations`
+3. 保存任务 ID
+4. 輪詢 `GET /v1/tasks/{task_id}` 或使用 callback
+5. 在過期前保存最终圖像 URL
 
 ## 程式碼範例
 
-Latest V8.1 examples:
+最新 V8.1 範例:
 
 - [cURL: V8.1 generation](./examples/curl/generate-image-v8-1.sh)
 - [JavaScript: V8.1 generation](./examples/javascript/basic-v8-1.mjs)
 
-Preserved V7 examples:
+保留的 V7 範例:
 
-- [cURL：基本生成](./examples/curl/generate-image.sh)
-- [cURL：圖像轉圖像](./examples/curl/image-to-image.sh)
-- [cURL：upscale](./examples/curl/upscale.sh)
-- [cURL：inpaint](./examples/curl/inpaint.sh)
-- [JavaScript：基本生成](./examples/javascript/basic.mjs)
-- [JavaScript：圖像轉圖像](./examples/javascript/image-to-image.mjs)
-- [JavaScript：upscale](./examples/javascript/upscale.mjs)
-- [JavaScript：inpaint](./examples/javascript/inpaint.mjs)
+- [cURL：完整首次运行流程](./examples/curl/complete-flow.sh)
+- [cURL：基礎生成](./examples/curl/generate-image.sh)
+- [cURL：图生图](./examples/curl/image-to-image.sh)
+- [cURL: upscale](./examples/curl/upscale.sh)
+- [cURL: inpaint](./examples/curl/inpaint.sh)
+- [Python：完整首次运行流程](./examples/python/complete_flow.py)
+- [JavaScript：完整首次运行流程](./examples/javascript/complete-flow.mjs)
+- [JavaScript：基礎生成](./examples/javascript/basic.mjs)
+- [JavaScript：图生图](./examples/javascript/image-to-image.mjs)
+- [JavaScript: upscale](./examples/javascript/upscale.mjs)
+- [JavaScript: inpaint](./examples/javascript/inpaint.mjs)
 
-## 工作流程比較
+## 工作流程對比
 
-| 需求 | 建議工作流程 | 原因 |
+| 如果你需要... | 推薦 工作流程 | 原因 |
 |---|---|---|
-| 初次生成 | `mj-v7` | V7 原生圖像生成 |
-| 在 prompt 中使用一張或多張參考圖像 | `mj-v7` | 支援在 prompt 開頭放置圖像 URL |
-| 僅更改選定的局部區域 | `mj-v7-inpaint` | 遮罩式編輯 |
-| 向外擴展構圖 | `mj-v7-outpaint` | 超越原始圖像的更寬取景 |
-| 向左、右、上或下延伸 | `mj-v7-pan` | 方向性延伸 |
-| 以新 prompt 重新詮釋一個結果 | `mj-v7-remix` | 從現有任務進行 prompt 式變化 |
-| 保留版面但更改材質或表面效果 | `mj-v7-retexture` | 從輸入圖像進行風格與紋理轉換 |
-| 從一張圖像剪裁主體 | `mj-v7-remove-bg` | 無需 prompt |
-| 在更大畫布上重新定位圖像 | `mj-v7-edit` | 具備定位控制的畫布擴展 |
+| 最新圖像生成 | `mj-v8.1` | 最新 V8.1 模型 |
+| 快速草圖探索 | `mj-v8.1` + `speed: "draft"` | 24 张轻量 0.5K 草圖 |
+| HD 輸出 | `mj-v8.1` + `quality: "hd"` | native HD 輸出 |
+| 變體 | `mj-v8.1-variation` | subtle / strong 變體 |
+| prompt 重新詮釋 | `mj-v8.1-remix` | 在保留來源結構的基礎上使用新 prompt |
+| 畫布编辑 | `mj-v8.1-edit` | 重新定位并填充空白區域 |
+| 上傳圖像编辑 | `mj-v8.1-upload-paint` | mask 与畫布工作流程 |
+| 背景移除 | `mj-v8.1-remove-bg` | 不需要 prompt 或 speed 欄位 |
+| 既有 V7 流程 | V7 模型 | 保留相容性 |
 
 ## 正式環境注意事項
 
-- V8.1 is the latest integration path for new Midjourney image-generation work
-- V8.1 generated image links are valid for 30 days according to the official V8.1 image-generation docs
-- V8.1 speed is controlled with `model_params.speed`, not prompt flags
-- V8.1 output resolution is controlled with top-level `quality`, not `--q` or `--hd`
-- V8.1 `draft` returns 24 lightweight sketches and is incompatible with `quality: "hd"`
-- V8.1 remove background only accepts `model` and `image_urls`
-- 所有 endpoint 均需 Bearer token 驗證
-- Midjourney 生成與編輯工作流程均為非同步
-- callback 必須使用 HTTPS，且不能指向私有 IP 位址
-- callback 逾時為 10 秒，最多重試 3 次
-- 生成的圖像連結有效期為 24 小時，請盡快儲存
-- `--v`、`--version` 及 `--niji` 在此處的 V7 請求中不支援
-- `--fast`、`--draft` 及 `--turbo` 不應寫入 prompt，請使用 `model_params.speed`
-- 編輯工作流程通常需要已完成的任務 ID 及所選圖像編號
-- remove background 不使用 prompt 或速度參數
-- retexture 與 remove background 直接接受輸入圖像 URL，而非依賴來源任務
+- Bearer token 認證
+- 非同步任务
+- callback 必须使用 HTTPS，且不允许使用私有 IP URL
+- callback 超时 10 秒，最多重试 3 次
+- 根据官方文件，V8.1 圖像链接有效期为 30 天
+- `model_params.speed` 控制速度
+- 顶层 `quality` 控制输出分辨率
+- `draft` 返回 24 张草圖，且不能与 `quality: "hd"` 组合
+- `mj-v8.1-remove-bg` 只接受 `model` 和 `image_urls`
+- V7 文件和示例保留用于相容既有集成
 
 ## 常見問題
 
-### Midjourney API 如何計費？
-Midjourney V7 生成以請求為單位計費，而非以圖像計費。一次請求目標輸出 4 張圖像，但審核過濾可能減少回傳圖像數量。
+### 新的 Midjourney API 整合應該用哪個模型？
+預設使用 `mj-v8.1` 做新的圖像生成，除非你明確需要某個保留的 V7 工作流程。
 
-### 如何進行圖像轉圖像？
-在 `prompt` 開頭放置一張或多張圖像 URL，然後加入文字描述與 Midjourney 參數。
+### 如何啟用 V8.1 HD 輸出？
+設定頂層欄位 `"quality": "hd"`，並把 `model_params.speed` 設為 `fast` 或 `turbo`。不要把 `hd` 和 `draft` 組合。
 
-### 為何編輯 endpoint 需要任務 ID？
-upscale、inpaint、outpaint、pan、enhance 及 remix 等操作作用於已完成任務中所選的圖像，因此需要原始任務參考。
+### 可以在 prompt 裡寫 `--turbo`、`--draft` 或 `--hd` 嗎？
+不可以。速度透過 `model_params.speed` 控制，輸出品質透過頂層 `quality` 控制。
 
-### 可以在 prompt 中使用 `--turbo` 或 `--draft` 嗎？
-不行。速度透過 `model_params.speed` 控制。
+### 還能繼續使用 V7 範例嗎？
+可以。V7 文件和範例是有意保留的，用於既有整合。
 
 ## 相關連結
 
-- [Midjourney V7 產品頁面](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [取得 API 金鑰](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
-- [Midjourney API 文件](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 圖像生成 Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v8-1-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Midjourney V8.1 Prompt 指南](https://docs.evolink.ai/en/api-manual/image-series/midjourney/midjourney-v8-1-prompt-guide?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [Preserved Midjourney V7 圖像生成 Docs](https://docs.evolink.ai/en/api-manual/image-series/midjourney/mj-v7-image-generate?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
+- [API 金鑰](https://evolink.ai/signup?utm_source=github&utm_medium=readme&utm_campaign=midjourney-api)
 
-## 儲存庫說明
+## 倉庫說明
 
-本儲存庫是 EvoLink.ai 上 Midjourney API 使用的文件與範例中心。詳細的官方工作流程資料整理於 `docs/official-api/` 下，`mjv7参考/` 作為本地參考資料保留，並透過 `.gitignore` 排除於上傳之外。
+本倉庫是 EvoLink.ai 上 Midjourney API 的文件與範例中心。詳細官方 工作流程 資料整理在 `docs/official-api/` 下，`mjv7参考/` 作為本地參考資料保留，並透過 `.gitignore` 排除上傳。
